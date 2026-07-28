@@ -2,40 +2,31 @@
 
 Fully themable, low-boilerplate charting over Apache ECharts.
 
-`vizly` is built for teams that want Apache ECharts without inheriting pyecharts’ China-primary defaults — English-first APIs/docs, local/allowlisted JS, and a Kineticquant-maintained trust posture. That is **not** USA-only geography:
+Ship production charts in a few lines of Python — DataFrame in, HTML or JSON out — without nested option builders. Built for speed (local assets, one ECharts load per page) and for native embeds in the stacks you already use.
 
-- Local / allowlisted JS assets (no China-primary CDN defaults)
-- English APIs/docs/errors (`en-US` chrome)
-- No Baidu Map provider
-- **Worldwide** map atlas by default; bundled `usa` regional pack; China administrative packs **opt-in only**
+- **Easy to use** — set a theme, call `vz.line` / `vz.bar` / …, export with `to_html()` or `to_option()`
+- **Highly performant** — vendored JS by default; GL and plugins load only when a chart needs them
+- **Worldwide maps by default** — bundled world atlas plus `usa`; register extra GeoJSON packs when you need them
+- **Trusted asset defaults** — no Chinese CDN forced in the backend (unlike many other Python ECharts wrappers)
+- **Wide chart coverage** — cartesian, statistical, geo, graph, 3D, compose (`page` / `tab` / `timeline`), and more — see [Chart inventory](#chart-inventory)
+- **Native integrations** — Streamlit, FastAPI, Flask, Django, HTMX, and Jupyter
 
 ```python
 import vizly as vz
 vz.map(df)                 # world (default)
 vz.map(df, map="usa")      # US states
-vz.register_map_pack(...)  # e.g. China GeoJSON you supply
+vz.register_map_pack(...)  # custom GeoJSON you supply
 ```
 
 ## Install
 
+Requires Python **3.9** or later.
+
 ```bash
-pip install -e ".[dev,examples]"
-python -m pytest -m "not browser" -v
+pip install vizly
 ```
 
-**CI targets:** Python **3.9–3.13**. Full testing & validation runbook: **[TESTING.md](TESTING.md)**. Also [CHANGELOG.md](CHANGELOG.md) and [RELEASE.md](RELEASE.md).
-
-| Level | Command | Role |
-|-------|---------|------|
-| 1+2 (CI gate) | `pytest -m "not browser"` | Contracts + sample/golden HTML |
-| 3 Browser | `pytest -m browser` | Headless hero charts (Playwright) |
-| Local visual review | `python scripts/validate_samples_browser.py --gallery` | Headed Chromium + gallery |
-
-Refresh option goldens: `python scripts/update_sample_goldens.py`
-
-Framework extras: `vizly[streamlit]`, `vizly[fastapi]`, `vizly[flask]`, `vizly[django]`.
-
-PyPI: `pip install vizly` (when published).
+Framework extras (install only what you use): `vizly[streamlit]`, `vizly[fastapi]`, `vizly[flask]`, `vizly[django]`.
 
 ### Export (deferred)
 
@@ -99,9 +90,9 @@ These helpers **do not** call live APIs — they only normalize payloads you alr
 |------|----------|
 | `assets.mode = "local"` (default) | Inline vendored `echarts.min.js` (+ GL/plugins only when needed) |
 | `assets.mode = "cdn"` | Allowlisted hosts only |
-| Banned by default | bootcdn, npmmirror, assets.pyecharts.org, Baidu Map, etc. |
+| Banned by default | China-primary CDN hosts (bootcdn, npmmirror, assets.pyecharts.org, …) |
 
-Maps: bundled `world` + `usa`; China packs via `register_map_pack` only.
+Maps: bundled `world` + `usa`; extra regional packs via `register_map_pack`.
 
 ## Chart inventory
 
@@ -116,7 +107,7 @@ vz.list_unavailable_chart_types()  # e.g. chord (upstream-unavailable)
 
 **Band C:** pictorial_bar, theme_river, liquid, surface3d  
 
-China administrative map packs are **not** chart types — register them with `vz.register_map_pack` when you need them.
+Extra map packs are **not** chart types — register them with `vz.register_map_pack` when you need them.
 
 ## Integrations
 
@@ -244,3 +235,22 @@ Escape hatches remain: `chart.update(...)`, `chart.merge_option({...})`, `vz.fro
 | `examples/jupyter_gallery.ipynb` | Notebook |
 | `examples/themes/atlantic.json` | Custom theme |
 | `examples/band_a_gallery.py` / `band_bc_gallery.py` | Chart HTML gallery seeds |
+
+## Development
+
+For work on this repository (not needed for `pip install vizly`):
+
+```bash
+pip install -e ".[dev,examples]"
+python -m pytest -m "not browser" -v
+```
+
+| Level | Command | Role |
+|-------|---------|------|
+| 1+2 (CI gate) | `pytest -m "not browser"` | Contracts + sample/golden HTML |
+| 3 Browser | `pytest -m browser` | Headless hero charts (Playwright) |
+| Local visual review | `python scripts/validate_samples_browser.py --gallery` | Headed Chromium + gallery |
+
+Refresh option goldens: `python scripts/update_sample_goldens.py`
+
+Full testing runbook: **[TESTING.md](TESTING.md)**. Also [CHANGELOG.md](CHANGELOG.md) and [RELEASE.md](RELEASE.md).

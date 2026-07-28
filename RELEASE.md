@@ -35,7 +35,9 @@ Do the same on [test.pypi.org](https://test.pypi.org) with environment `testpypi
 | `ENABLE_TESTPYPI_PUBLISH` | `true` | Tag/dispatch may upload to TestPyPI (optional; skip is green) |
 | `ENABLE_PYPI_PUBLISH` | `true` | **Required** for a production upload; without it the `publish-pypi` job fails |
 
-Leave `ENABLE_PYPI_PUBLISH` unset until Trusted Publishing is ready. A green **GitHub Environment deployment** for `pypi` only means the job ran — check the **Publish to PyPI** step (and [pypi.org/project/vizly](https://pypi.org/project/vizly/)) to confirm the upload. This workflow does **not** create a GitHub Release.
+Leave `ENABLE_PYPI_PUBLISH` unset until Trusted Publishing is ready. A green **GitHub Environment deployment** for `pypi` only means the job ran — check the **Publish to PyPI** step (and [pypi.org/project/vizly](https://pypi.org/project/vizly/)) to confirm the upload.
+
+On a `v*` tag, Release also creates a **GitHub Release** (changelog body + `dist/` artifacts) after a successful PyPI upload.
 
 ## Each release
 
@@ -45,13 +47,13 @@ Leave `ENABLE_PYPI_PUBLISH` unset until Trusted Publishing is ready. A green **G
 4. Tag and push:
 
 ```bash
-git tag v0.2.0
-git push origin v0.2.0
+git tag v0.2.1
+git push origin v0.2.1
 ```
 
-That triggers **Release**: build → (optional) TestPyPI → (optional) PyPI.
+That triggers **Release**: verify (lint + tests) → build → (optional) TestPyPI → PyPI → GitHub Release.
 
-Or: **Actions → Release → Run workflow**.
+Or: **Actions → Release → Run workflow** (build/publish only; GitHub Release needs a `v*` tag).
 
 ## Local verify (optional, no upload)
 
@@ -88,7 +90,7 @@ python scripts/validate_samples_browser.py --gallery        # visible full matri
 |----------|------|------|
 | [ci.yml](.github/workflows/ci.yml) | Push/PR to `main` | Lint, Level 1+2 tests, coverage, build; uploads sample HTML |
 | [browser.yml](.github/workflows/browser.yml) | Weekly / `v*` tag / manual | Level 3 Playwright hero smoke |
-| [release.yml](.github/workflows/release.yml) | `v*` tag or manual | Build artifacts + publish if enabled |
+| [release.yml](.github/workflows/release.yml) | `v*` tag or manual | Verify → build → TestPyPI (optional) → PyPI → GitHub Release (tags) |
 
 ## Why not publish from the repo checkout on your PC?
 

@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-07-28
+
+### Added
+- Release workflow verify gate (ruff + Level 1/2 pytest) before build/publish
+- GitHub Release on ``v*`` tags (CHANGELOG body + ``dist/`` artifacts)
+- Packaging contract tests: ``__version__`` sync with ``pyproject.toml``; runtime requires ``pandas`` and ``numpy``
+
+### Changed
+- PyPI / package summary: high-performance, low-boilerplate, fully-themable charting over Apache ECharts (local assets, native web embeds)
+- Declare runtime dependencies ``pandas`` and ``numpy`` in package metadata
+- Release workflow fails when ``ENABLE_PYPI_PUBLISH`` is not set (no silent skipped upload)
+
 ## [0.2.0] - 2026-07-28
 
 ### Added
@@ -69,6 +81,7 @@ CDN mode (optional) allowlists `cdn.jsdelivr.net` and `unpkg.com` only.
 - Runtime depends on `pandas` + `numpy` only (no pyecharts dependency).
 - `vizly[export]` (PNG/PDF snapshot) is deferred.
 
-[Unreleased]: https://github.com/kineticquant/vizly/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/kineticquant/vizly/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/kineticquant/vizly/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/kineticquant/vizly/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/kineticquant/vizly/releases/tag/v0.1.0

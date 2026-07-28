@@ -1,0 +1,89 @@
+{
+  "animation": true,
+  "animationDuration": 400,
+  "backgroundColor": "#0F172A",
+  "color": [
+    "#93C5FD",
+    "#5EEAD4",
+    "#FCD34D",
+    "#FCA5A5",
+    "#C4B5FD",
+    "#86EFAC",
+    "#FDBA74",
+    "#A5B4FC"
+  ],
+  "legend": {
+    "show": true,
+    "textStyle": {
+      "color": "#CBD5E1"
+    },
+    "top": "2%"
+  },
+  "series": [
+    {
+      "data": [
+        {
+          "name": "A",
+          "symbolSize": 20
+        },
+        {
+          "name": "B",
+          "symbolSize": 20
+        },
+        {
+          "name": "X",
+          "symbolSize": 20
+        },
+        {
+          "name": "Y",
+          "symbolSize": 20
+        }
+      ],
+      "force": {
+        "repulsion": 120
+      },
+      "label": {
+        "show": true
+      },
+      "layout": "force",
+      "links": [
+        {
+          "source": "A",
+          "target": "X",
+          "value": 1
+        },
+        {
+          "source": "A",
+          "target": "Y",
+          "value": 1
+        },
+        {
+          "source": "B",
+          "target": "Y",
+          "value": 1
+        }
+      ],
+      "roam": true,
+      "type": "graph"
+    }
+  ],
+  "textStyle": {
+    "color": "#E2E8F0",
+    "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
+  },
+  "title": {
+    "textStyle": {
+      "color": "#F1F5F9",
+      "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",
+      "fontWeight": 600
+    }
+  },
+  "tooltip": {
+    "backgroundColor": "rgba(15,23,42,0.96)",
+    "borderColor": "#334155",
+    "borderWidth": 1,
+    "textStyle": {
+      "color": "#E2E8F0"
+    }
+  }
+}

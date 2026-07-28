@@ -1,0 +1,84 @@
+{
+  "animation": true,
+  "animationDuration": 400,
+  "backgroundColor": "#0F172A",
+  "color": [
+    "#93C5FD",
+    "#5EEAD4",
+    "#FCD34D",
+    "#FCA5A5",
+    "#C4B5FD",
+    "#86EFAC",
+    "#FDBA74",
+    "#A5B4FC"
+  ],
+  "geo": {
+    "emphasis": {
+      "label": {
+        "show": true
+      }
+    },
+    "map": "world",
+    "roam": true
+  },
+  "legend": {
+    "show": true,
+    "textStyle": {
+      "color": "#CBD5E1"
+    },
+    "top": "2%"
+  },
+  "series": [
+    {
+      "coordinateSystem": "geo",
+      "data": [
+        {
+          "name": "NYC",
+          "symbolSize": 10.0,
+          "value": [
+            -74.0,
+            40.7
+          ]
+        },
+        {
+          "name": "LA",
+          "symbolSize": 20.0,
+          "value": [
+            -118.2,
+            34.0
+          ]
+        },
+        {
+          "name": "Chicago",
+          "symbolSize": 15.0,
+          "value": [
+            -87.6,
+            41.9
+          ]
+        }
+      ],
+      "symbolSize": 8,
+      "type": "scatter"
+    }
+  ],
+  "textStyle": {
+    "color": "#E2E8F0",
+    "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
+  },
+  "title": {
+    "textStyle": {
+      "color": "#F1F5F9",
+      "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",
+      "fontWeight": 600
+    }
+  },
+  "tooltip": {
+    "backgroundColor": "rgba(15,23,42,0.96)",
+    "borderColor": "#334155",
+    "borderWidth": 1,
+    "textStyle": {
+      "color": "#E2E8F0"
+    },
+    "trigger": "item"
+  }
+}

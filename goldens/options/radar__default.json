@@ -1,0 +1,84 @@
+{
+  "animation": true,
+  "animationDuration": 400,
+  "backgroundColor": "#FFFFFF",
+  "color": [
+    "#0B1F33",
+    "#2F6FED",
+    "#12A594",
+    "#E2A03F",
+    "#D64545",
+    "#7C8C9E",
+    "#5B4B8A",
+    "#2D9CDB"
+  ],
+  "legend": {
+    "data": [
+      "A",
+      "B"
+    ],
+    "show": true,
+    "textStyle": {
+      "color": "#374151"
+    },
+    "top": "2%"
+  },
+  "radar": {
+    "indicator": [
+      {
+        "max": 88.0,
+        "name": "speed"
+      },
+      {
+        "max": 99.00000000000001,
+        "name": "power"
+      },
+      {
+        "max": 77.0,
+        "name": "range"
+      }
+    ]
+  },
+  "series": [
+    {
+      "data": [
+        {
+          "name": "A",
+          "value": [
+            80,
+            60,
+            70
+          ]
+        },
+        {
+          "name": "B",
+          "value": [
+            70,
+            90,
+            50
+          ]
+        }
+      ],
+      "type": "radar"
+    }
+  ],
+  "textStyle": {
+    "color": "#111827",
+    "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
+  },
+  "title": {
+    "textStyle": {
+      "color": "#111827",
+      "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",
+      "fontWeight": 600
+    }
+  },
+  "tooltip": {
+    "backgroundColor": "rgba(255,255,255,0.96)",
+    "borderColor": "#E5E7EB",
+    "borderWidth": 1,
+    "textStyle": {
+      "color": "#111827"
+    }
+  }
+}

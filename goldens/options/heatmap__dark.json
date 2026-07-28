@@ -1,0 +1,134 @@
+{
+  "animation": true,
+  "animationDuration": 400,
+  "backgroundColor": "#0F172A",
+  "color": [
+    "#93C5FD",
+    "#5EEAD4",
+    "#FCD34D",
+    "#FCA5A5",
+    "#C4B5FD",
+    "#86EFAC",
+    "#FDBA74",
+    "#A5B4FC"
+  ],
+  "grid": {
+    "height": "70%",
+    "top": "10%"
+  },
+  "legend": {
+    "show": true,
+    "textStyle": {
+      "color": "#CBD5E1"
+    },
+    "top": "2%"
+  },
+  "series": [
+    {
+      "data": [
+        [
+          0,
+          0,
+          1.0
+        ],
+        [
+          0,
+          1,
+          2.0
+        ],
+        [
+          1,
+          0,
+          3.0
+        ],
+        [
+          1,
+          1,
+          4.0
+        ]
+      ],
+      "label": {
+        "show": false
+      },
+      "type": "heatmap"
+    }
+  ],
+  "textStyle": {
+    "color": "#E2E8F0",
+    "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
+  },
+  "title": {
+    "textStyle": {
+      "color": "#F1F5F9",
+      "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",
+      "fontWeight": 600
+    }
+  },
+  "tooltip": {
+    "backgroundColor": "rgba(15,23,42,0.96)",
+    "borderColor": "#334155",
+    "borderWidth": 1,
+    "position": "top",
+    "textStyle": {
+      "color": "#E2E8F0"
+    }
+  },
+  "visualMap": {
+    "bottom": "0%",
+    "calculable": true,
+    "left": "center",
+    "max": 4.0,
+    "min": 1.0,
+    "orient": "horizontal"
+  },
+  "xAxis": {
+    "axisLabel": {
+      "color": "#94A3B8"
+    },
+    "axisLine": {
+      "lineStyle": {
+        "color": "#334155"
+      }
+    },
+    "data": [
+      "a",
+      "b"
+    ],
+    "nameTextStyle": {
+      "color": "#CBD5E1"
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#1E293B",
+        "type": "solid"
+      },
+      "show": true
+    },
+    "type": "category"
+  },
+  "yAxis": {
+    "axisLabel": {
+      "color": "#94A3B8"
+    },
+    "axisLine": {
+      "lineStyle": {
+        "color": "#334155"
+      }
+    },
+    "data": [
+      "m",
+      "n"
+    ],
+    "nameTextStyle": {
+      "color": "#CBD5E1"
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#1E293B",
+        "type": "solid"
+      },
+      "show": true
+    },
+    "type": "category"
+  }
+}

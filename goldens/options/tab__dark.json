@@ -1,0 +1,225 @@
+{
+  "_vizly_compose": {
+    "labels": [
+      "bar",
+      "pie"
+    ],
+    "options": [
+      {
+        "animation": true,
+        "animationDuration": 400,
+        "backgroundColor": "#0F172A",
+        "color": [
+          "#93C5FD",
+          "#5EEAD4",
+          "#FCD34D",
+          "#FCA5A5",
+          "#C4B5FD",
+          "#86EFAC",
+          "#FDBA74",
+          "#A5B4FC"
+        ],
+        "legend": {
+          "data": [
+            "sales"
+          ],
+          "show": true,
+          "textStyle": {
+            "color": "#CBD5E1"
+          },
+          "top": "2%"
+        },
+        "series": [
+          {
+            "barMaxWidth": 48,
+            "data": [
+              3,
+              5,
+              2
+            ],
+            "label": {
+              "show": false
+            },
+            "name": "sales",
+            "type": "bar"
+          }
+        ],
+        "textStyle": {
+          "color": "#E2E8F0",
+          "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
+        },
+        "title": {
+          "textStyle": {
+            "color": "#F1F5F9",
+            "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",
+            "fontWeight": 600
+          }
+        },
+        "tooltip": {
+          "backgroundColor": "rgba(15,23,42,0.96)",
+          "borderColor": "#334155",
+          "borderWidth": 1,
+          "textStyle": {
+            "color": "#E2E8F0"
+          },
+          "trigger": "axis"
+        },
+        "xAxis": {
+          "axisLabel": {
+            "color": "#94A3B8"
+          },
+          "axisLine": {
+            "lineStyle": {
+              "color": "#334155"
+            }
+          },
+          "data": [
+            "East",
+            "West",
+            "South"
+          ],
+          "nameTextStyle": {
+            "color": "#CBD5E1"
+          },
+          "splitLine": {
+            "lineStyle": {
+              "color": "#1E293B",
+              "type": "solid"
+            },
+            "show": true
+          },
+          "type": "category"
+        },
+        "yAxis": {
+          "axisLabel": {
+            "color": "#94A3B8"
+          },
+          "axisLine": {
+            "lineStyle": {
+              "color": "#334155"
+            }
+          },
+          "nameTextStyle": {
+            "color": "#CBD5E1"
+          },
+          "splitLine": {
+            "lineStyle": {
+              "color": "#1E293B",
+              "type": "solid"
+            },
+            "show": true
+          },
+          "type": "value"
+        }
+      },
+      {
+        "animation": true,
+        "animationDuration": 400,
+        "backgroundColor": "#0F172A",
+        "color": [
+          "#93C5FD",
+          "#5EEAD4",
+          "#FCD34D",
+          "#FCA5A5",
+          "#C4B5FD",
+          "#86EFAC",
+          "#FDBA74",
+          "#A5B4FC"
+        ],
+        "legend": {
+          "left": "left",
+          "orient": "vertical",
+          "show": true,
+          "textStyle": {
+            "color": "#CBD5E1"
+          },
+          "top": "2%"
+        },
+        "series": [
+          {
+            "data": [
+              {
+                "name": "A",
+                "value": 10
+              },
+              {
+                "name": "B",
+                "value": 20
+              },
+              {
+                "name": "C",
+                "value": 30
+              }
+            ],
+            "label": {
+              "show": true
+            },
+            "radius": "65%",
+            "type": "pie"
+          }
+        ],
+        "textStyle": {
+          "color": "#E2E8F0",
+          "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
+        },
+        "title": {
+          "textStyle": {
+            "color": "#F1F5F9",
+            "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",
+            "fontWeight": 600
+          }
+        },
+        "tooltip": {
+          "backgroundColor": "rgba(15,23,42,0.96)",
+          "borderColor": "#334155",
+          "borderWidth": 1,
+          "textStyle": {
+            "color": "#E2E8F0"
+          },
+          "trigger": "item"
+        }
+      }
+    ],
+    "type": "tab"
+  },
+  "animation": true,
+  "animationDuration": 400,
+  "backgroundColor": "#0F172A",
+  "color": [
+    "#93C5FD",
+    "#5EEAD4",
+    "#FCD34D",
+    "#FCA5A5",
+    "#C4B5FD",
+    "#86EFAC",
+    "#FDBA74",
+    "#A5B4FC"
+  ],
+  "legend": {
+    "show": true,
+    "textStyle": {
+      "color": "#CBD5E1"
+    },
+    "top": "2%"
+  },
+  "textStyle": {
+    "color": "#E2E8F0",
+    "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
+  },
+  "title": {
+    "text": "tab",
+    "textStyle": {
+      "color": "#F1F5F9",
+      "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",
+      "fontWeight": 600
+    }
+  },
+  "tooltip": {
+    "backgroundColor": "rgba(15,23,42,0.96)",
+    "borderColor": "#334155",
+    "borderWidth": 1,
+    "textStyle": {
+      "color": "#E2E8F0"
+    }
+  }
+}

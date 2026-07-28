@@ -1,0 +1,109 @@
+{
+  "animation": true,
+  "animationDuration": 400,
+  "backgroundColor": "#0F172A",
+  "color": [
+    "#93C5FD",
+    "#5EEAD4",
+    "#FCD34D",
+    "#FCA5A5",
+    "#C4B5FD",
+    "#86EFAC",
+    "#FDBA74",
+    "#A5B4FC"
+  ],
+  "legend": {
+    "data": [
+      "revenue"
+    ],
+    "show": true,
+    "textStyle": {
+      "color": "#CBD5E1"
+    },
+    "top": "2%"
+  },
+  "series": [
+    {
+      "data": [
+        10,
+        20,
+        15
+      ],
+      "label": {
+        "show": false
+      },
+      "name": "revenue",
+      "showSymbol": true,
+      "smooth": true,
+      "symbolSize": 6,
+      "type": "line"
+    }
+  ],
+  "textStyle": {
+    "color": "#E2E8F0",
+    "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
+  },
+  "title": {
+    "textStyle": {
+      "color": "#F1F5F9",
+      "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",
+      "fontWeight": 600
+    }
+  },
+  "tooltip": {
+    "backgroundColor": "rgba(15,23,42,0.96)",
+    "borderColor": "#334155",
+    "borderWidth": 1,
+    "textStyle": {
+      "color": "#E2E8F0"
+    },
+    "trigger": "axis"
+  },
+  "xAxis": {
+    "axisLabel": {
+      "color": "#94A3B8"
+    },
+    "axisLine": {
+      "lineStyle": {
+        "color": "#334155"
+      }
+    },
+    "data": [
+      "2026-01-01T00:00:00",
+      "2026-01-02T00:00:00",
+      "2026-01-03T00:00:00"
+    ],
+    "nameTextStyle": {
+      "color": "#CBD5E1"
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#1E293B",
+        "type": "solid"
+      },
+      "show": true
+    },
+    "type": "category"
+  },
+  "yAxis": {
+    "axisLabel": {
+      "color": "#94A3B8"
+    },
+    "axisLine": {
+      "lineStyle": {
+        "color": "#334155"
+      }
+    },
+    "nameTextStyle": {
+      "color": "#CBD5E1"
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#1E293B",
+        "type": "solid"
+      },
+      "show": true
+    },
+    "type": "value"
+  }
+}

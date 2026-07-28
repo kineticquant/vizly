@@ -1,0 +1,110 @@
+{
+  "animation": true,
+  "animationDuration": 400,
+  "backgroundColor": "#0F172A",
+  "color": [
+    "#93C5FD",
+    "#5EEAD4",
+    "#FCD34D",
+    "#FCA5A5",
+    "#C4B5FD",
+    "#86EFAC",
+    "#FDBA74",
+    "#A5B4FC"
+  ],
+  "legend": {
+    "show": true,
+    "textStyle": {
+      "color": "#CBD5E1"
+    },
+    "top": "2%"
+  },
+  "series": [
+    {
+      "data": [
+        [
+          1.0,
+          1.5,
+          2.0,
+          2.5,
+          3.0
+        ],
+        [
+          4.0,
+          4.5,
+          5.0,
+          5.5,
+          6.0
+        ]
+      ],
+      "name": "score",
+      "type": "boxplot"
+    }
+  ],
+  "textStyle": {
+    "color": "#E2E8F0",
+    "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
+  },
+  "title": {
+    "textStyle": {
+      "color": "#F1F5F9",
+      "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",
+      "fontWeight": 600
+    }
+  },
+  "tooltip": {
+    "backgroundColor": "rgba(15,23,42,0.96)",
+    "borderColor": "#334155",
+    "borderWidth": 1,
+    "textStyle": {
+      "color": "#E2E8F0"
+    },
+    "trigger": "item"
+  },
+  "xAxis": {
+    "axisLabel": {
+      "color": "#94A3B8"
+    },
+    "axisLine": {
+      "lineStyle": {
+        "color": "#334155"
+      }
+    },
+    "data": [
+      "g1",
+      "g2"
+    ],
+    "nameTextStyle": {
+      "color": "#CBD5E1"
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#1E293B",
+        "type": "solid"
+      },
+      "show": true
+    },
+    "type": "category"
+  },
+  "yAxis": {
+    "axisLabel": {
+      "color": "#94A3B8"
+    },
+    "axisLine": {
+      "lineStyle": {
+        "color": "#334155"
+      }
+    },
+    "nameTextStyle": {
+      "color": "#CBD5E1"
+    },
+    "splitLine": {
+      "lineStyle": {
+        "color": "#1E293B",
+        "type": "solid"
+      },
+      "show": true
+    },
+    "type": "value"
+  }
+}

@@ -2,14 +2,14 @@
 
 Fully themable, low-boilerplate charting over Apache ECharts.
 
-Ship production charts in a few lines of Python — DataFrame in, HTML or JSON out — without nested option builders. Built for speed (local assets, one ECharts load per page) and for native embeds in the stacks you already use.
+Ship production charts in a few lines of Python (DataFrame in, HTML or JSON out) without nested option builders. Built for speed (local assets, one ECharts load per page) and for native embeds in the stacks you already use.
 
-- **Easy to use** — set a theme, call `vz.line` / `vz.bar` / …, export with `to_html()` or `to_option()`
-- **Highly performant** — vendored JS by default; GL and plugins load only when a chart needs them
-- **Worldwide maps by default** — bundled world atlas plus `usa`; register extra GeoJSON packs when you need them
-- **Trusted asset defaults** — no Chinese CDN forced in the backend (unlike many other Python ECharts wrappers)
-- **Wide chart coverage** — cartesian, statistical, geo, graph, 3D, compose (`page` / `tab` / `timeline`), and more — see [Chart inventory](#chart-inventory)
-- **Native integrations** — Streamlit, FastAPI, Flask, Django, HTMX, and Jupyter
+- **Easy to use**: set a theme, call `vz.line` / `vz.bar` / …, export with `to_html()` or `to_option()`
+- **Highly performant**: vendored JS by default; GL and plugins load only when a chart needs them
+- **Worldwide maps by default**: bundled world atlas plus `usa`; register extra GeoJSON packs when you need them
+- **Trusted asset defaults**: no Chinese CDN forced in the backend (unlike many other Python ECharts wrappers)
+- **Wide chart coverage**: cartesian, statistical, geo, graph, 3D, compose (`page` / `tab` / `timeline`), and more. See [Chart inventory](#chart-inventory).
+- **Native integrations**: Streamlit, FastAPI, Flask, Django, HTMX, and Jupyter
 
 ```python
 import vizly as vz
@@ -30,7 +30,7 @@ Framework extras (install only what you use): `vizly[streamlit]`, `vizly[fastapi
 
 ### Export (deferred)
 
-PNG/PDF snapshot export (`vizly[export]`) is **not** shipped yet. ECharts draws in JavaScript, so image export needs a JS canvas runtime (Node + `node-canvas` per Apache’s SSR guide, or a headless browser) — not a pure-Python conversion of the option dict. Use `to_html()` / `to_option()` meanwhile.
+PNG/PDF snapshot export (`vizly[export]`) is **not** shipped yet. ECharts draws in JavaScript, so image export needs a JS canvas runtime (Node + `node-canvas` per Apache’s SSR guide, or a headless browser), not a pure-Python conversion of the option dict. Use `to_html()` / `to_option()` meanwhile.
 
 ## 30-second example
 
@@ -62,7 +62,7 @@ vz.bar(df, x="region", y="sales", theme="dark")
 
 ### Ops-inspired themes
 
-`ops_grafana`, `ops_cloudwatch`, and `ops_kibana` are **visual inspiration only** — denser grids, muted animation, step-friendly lines so charts feel at home next to common ops UIs. They are **not affiliated** with Grafana Labs, Amazon Web Services, or Elastic; no logos or proprietary design-system assets are shipped. Theme IDs use an `ops_` prefix intentionally (zero trademark surface).
+`ops_grafana`, `ops_cloudwatch`, and `ops_kibana` are **visual inspiration only**: denser grids, muted animation, and step-friendly lines so charts feel at home next to common ops UIs. They are **not affiliated** with Grafana Labs, Amazon Web Services, or Elastic; no logos or proprietary design-system assets are shipped. Theme IDs use an `ops_` prefix intentionally (zero trademark surface).
 
 CDN asset URLs are allowlisted to `cdn.jsdelivr.net` and `unpkg.com` only. See `src/vizly/assets/README.md` for vendored file provenance.
 
@@ -82,7 +82,7 @@ vz.line(df, x="timestamp", y="value")           # single series
 # multi-series Prometheus matrix → group or filter by `series` column
 ```
 
-These helpers **do not** call live APIs — they only normalize payloads you already have.
+These helpers **do not** call live APIs. They only normalize payloads you already have.
 
 ## Trust / asset policy
 
@@ -107,7 +107,7 @@ vz.list_unavailable_chart_types()  # e.g. chord (upstream-unavailable)
 
 **Band C:** pictorial_bar, theme_river, liquid, surface3d  
 
-Extra map packs are **not** chart types — register them with `vz.register_map_pack` when you need them.
+Extra map packs are **not** chart types. Register them with `vz.register_map_pack` when you need them.
 
 ## Integrations
 
@@ -122,17 +122,17 @@ Shared embed contract (`vizly.integrations`):
 
 ### Multi-chart / dashboard (important)
 
-Single-chart helpers can include the ECharts library so one embed works alone. For **several charts on one page**, load assets **once** — otherwise each chart ships ~1MB of JS.
+Single-chart helpers can include the ECharts library so one embed works alone. For **several charts on one page**, load assets **once**. Otherwise each chart ships ~1MB of JS.
 
 ```python
 from vizly.integrations import assets_html, chart_html, dashboard_html
 
-# Pattern A — shell page (auto GL/plugins from charts=)
+# Pattern A: shell page (auto GL/plugins from charts=)
 head = assets_html(charts=[c1, c2])
 a = chart_html(c1, fragment=True, include_assets=False)
 b = chart_html(c2, fragment=True, include_assets=False)
 
-# Pattern B — one HTML blob (assets once internally)
+# Pattern B: one HTML blob (assets once internally)
 html = dashboard_html([c1, c2], title="Ops")
 # same idea: vz.page(charts=[c1, c2]).to_html()
 ```
@@ -197,12 +197,12 @@ See `examples/django_demo/`.
 
 ```python
 from vizly.integrations.htmx import htmx_chart_fragment, htmx_or_full
-# examples/htmx_demo/app.py — button hx-get swaps #chart
+# examples/htmx_demo/app.py: button hx-get swaps #chart
 ```
 
 ### Jupyter
 
-Open `examples/jupyter_gallery.ipynb` — charts display via `_repr_html_()`.
+Open `examples/jupyter_gallery.ipynb`: charts display via `_repr_html_()`.
 
 ## Known limitations
 
@@ -212,13 +212,13 @@ Open `examples/jupyter_gallery.ipynb` — charts display via `_repr_html_()`.
 
 ## Less boilerplate than raw option builders
 
-**Verbose option-builder style (illustrative):** many nested calls for series, axes, tooltip, and theme (~15–25 lines).
+**Verbose option-builder style (illustrative):** many nested calls for series, axes, tooltip, and theme (~15-25 lines).
 
 **vizly after one theme call:**
 
 ```python
 vz.set_theme("corporate")
-vz.bar(df, x="region", y="sales", title="Sales")  # ~1–2 lines
+vz.bar(df, x="region", y="sales", title="Sales")  # ~1-2 lines
 ```
 
 Escape hatches remain: `chart.update(...)`, `chart.merge_option({...})`, `vz.from_option(option)`.

@@ -45,8 +45,8 @@ Leave them unset/`false` until the pending publisher is configured — the workf
 4. Tag and push:
 
 ```bash
-git tag v0.1.0
-git push origin v0.1.0
+git tag v0.2.0
+git push origin v0.2.0
 ```
 
 That triggers **Release**: build → (optional) TestPyPI → (optional) PyPI.

@@ -7,12 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-07-28
+
 ### Added
 - Streamlit ``st_dashboard`` / multi-chart ``st_vizly([...])`` (one iframe, ECharts once)
 - Django ``{% vizly_dashboard %}``; ``{% vizly_assets charts=... %}`` auto GL/plugins
 - ``assets_html(charts=...)`` aggregates GL/plugin needs for shell pages
 - Public ``list_bundled_maps`` / ``list_opt_in_maps``
-- GitHub Actions CI (lint, pytest + coverage on core modules, build) for Python 3.9–3.13
+- GitHub Actions CI (lint, pytest + coverage on core modules, build) for Python 3.9-3.13
 - Release workflow scaffolding for TestPyPI / PyPI on version tags
 - Level 2 sample / golden chart suite (`tests/samples/`, committed `goldens/options/`, gitignored `artifacts/html/`)
 - Level 3 Playwright hero-chart browser smoke (`tests/browser/`, `vizly[browser]`, nightly/tag workflow)
@@ -25,19 +27,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Trust scanner checks ``<script src>`` hosts only (not option JSON labels)
 - Metrics helpers warn and set ``DataFrame.attrs['vizly_skipped']`` when dropping bad rows
 - Page/tab ``to_option()`` compose payload no longer includes a fake empty ``series`` stub
-- Wording aligned to English-first / trusted software chain (worldwide maps by default)
+- Wording aligned to ease-of-use / performance / worldwide maps / native integrations (trusted asset defaults; no Chinese CDN forced)
 
-## [0.1.0] — 2026-07-27
+### Trust / assets (pinned for this release)
 
-Initial public preview of **vizly**: English-first, fully themable charting over Apache ECharts.
+| Asset | Version | Hosting |
+|-------|---------|---------|
+| `echarts.min.js` | **5.5.1** | Vendored (jsDelivr source) |
+| `echarts-gl.min.js` | **2.0.9** | Vendored; loaded only for 3D |
+| `echarts-wordcloud.min.js` | **2.1.0** | Vendored; wordcloud only |
+| `echarts-liquidfill.min.js` | **3.1.0** | Vendored; liquid only |
+| Maps | `world` + `usa` | Bundled GeoJSON |
+
+CDN mode (optional) allowlists `cdn.jsdelivr.net` and `unpkg.com` only.
+
+## [0.1.0] - 2026-07-27
+
+Initial public preview of **vizly**: fully themable, low-boilerplate charting over Apache ECharts. Easy DataFrame API, high performance, worldwide maps by default, and native web-stack embeds.
 
 ### Added
 - Theme engine (presets, registry, deep-merge, per-chart override)
 - Data layer + `BaseChart` + trust-safe HTML/JSON renderer (local assets default)
-- Full chart matrix Bands A–C (`list_chart_types()`); `chord` documented upstream-unavailable
+- Full chart matrix Bands A-C (`list_chart_types()`); `chord` documented upstream-unavailable
 - Integrations: Streamlit, FastAPI, Flask, Django template tags, HTMX fragments
 - Ops metric helpers: `from_prometheus`, `from_cloudwatch`, `from_elasticsearch` / `from_elk`
-- Worldwide map atlas by default; bundled `usa` regional pack; China packs opt-in only
+- Worldwide map atlas by default; bundled `usa` regional pack; extra packs via `register_map_pack`
 
 ### Trust / assets (pinned for this release)
 
@@ -55,5 +69,6 @@ CDN mode (optional) allowlists `cdn.jsdelivr.net` and `unpkg.com` only.
 - Runtime depends on `pandas` + `numpy` only (no pyecharts dependency).
 - `vizly[export]` (PNG/PDF snapshot) is deferred.
 
-[Unreleased]: https://github.com/kineticquant/vizly/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/kineticquant/vizly/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/kineticquant/vizly/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/kineticquant/vizly/releases/tag/v0.1.0

@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "name": "atlantic",
+  "locale": "en-US",
+  "font_family": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",
+  "background": "#F8FAFC",
+  "text_color": "#0F172A",
+  "muted_text": "#64748B",
+  "palette": [
+    "#0B1F33",
+    "#1D4ED8",
+    "#0F766E",
+    "#B45309",
+    "#B91C1C",
+    "#475569",
+    "#6D28D9",
+    "#0369A1"
+  ],
+  "colorblind_safe": true,
+  "grid": {
+    "show": true,
+    "color": "#E2E8F0",
+    "type": "solid"
+  },
+  "axis": {
+    "line_color": "#CBD5E1",
+    "label_color": "#475569",
+    "name_color": "#334155"
+  },
+  "tooltip": {
+    "bg": "rgba(255,255,255,0.96)",
+    "border": "#E2E8F0",
+    "text": "#0F172A"
+  },
+  "legend": {
+    "show": true,
+    "top": "2%",
+    "text_color": "#334155"
+  },
+  "title": {
+    "color": "#0F172A",
+    "font_weight": 600
+  },
+  "animation": {
+    "enabled": true,
+    "duration": 350
+  },
+  "series_defaults": {
+    "line": {
+      "smooth": true,
+      "show_symbol": true,
+      "symbol_size": 5,
+      "label_show": false
+    },
+    "bar": {
+      "label_show": false,
+      "bar_max_width": 44
+    },
+    "pie": {
+      "label_show": true,
+      "rose_type": null
+    }
+  },
+  "assets": {
+    "mode": "local",
+    "cdn": null
+  }
+}

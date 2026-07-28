@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8"/>
+  <title>vizly Django</title>
+  {% load vizly_tags %}
+  {% comment %}Load ECharts once for the page. Pass charts= so GL/plugins match needs.{% endcomment %}
+  {% vizly_assets charts=charts %}
+</head>
+<body>
+  <h1>vizly + Django templates</h1>
+  {% vizly_chart chart height="420px" %}
+</body>
+</html>

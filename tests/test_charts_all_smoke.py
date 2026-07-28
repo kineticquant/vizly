@@ -6,6 +6,7 @@ import json
 
 import pandas as pd
 import pytest
+from tests.samples.fixtures import make_chart, samples_for
 
 import vizly as vz
 from vizly.charts import (
@@ -18,8 +19,6 @@ from vizly.config import reset_config
 from vizly.data import DataError
 from vizly.maps import reset_opt_in_maps
 from vizly.theme.registry import reset_registry
-
-from tests.samples.fixtures import make_chart, samples_for
 
 
 @pytest.fixture(autouse=True)

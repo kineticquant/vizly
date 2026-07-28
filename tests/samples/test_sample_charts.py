@@ -18,16 +18,15 @@ from pathlib import Path
 from typing import Any, Dict, Tuple
 
 import pytest
+from tests.samples.fixtures import SAMPLE_THEMES, make_chart
+from tests.samples.normalize import canonicalize_option, option_golden_text
+from tests.samples.paths import golden_path, html_artifact_path
 
 from vizly.charts import CHART_TYPES
 from vizly.config import reset_config
 from vizly.maps import reset_opt_in_maps
 from vizly.render import LOCAL_ASSET_MARKER, assert_html_trust_safe
 from vizly.theme.registry import reset_registry
-
-from tests.samples.fixtures import SAMPLE_THEMES, make_chart
-from tests.samples.normalize import canonicalize_option, option_golden_text
-from tests.samples.paths import golden_path, html_artifact_path
 
 ALL_TYPES = sorted(CHART_TYPES.keys())
 MIN_HTML_BYTES = 50_000  # local mode embeds echarts.min.js

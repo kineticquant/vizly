@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import vizly as vz
 
-
 # Stable public names expected for 0.1.x (Layer 6 audit).
 EXPECTED_PUBLIC = {
     "BaseChart",

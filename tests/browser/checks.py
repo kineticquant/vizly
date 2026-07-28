@@ -5,7 +5,6 @@ from __future__ import annotations
 from pathlib import Path
 from typing import List, Sequence
 
-
 READY_JS = """() => {
   const nodes = document.querySelectorAll('canvas, svg');
   if (!nodes.length) return false;

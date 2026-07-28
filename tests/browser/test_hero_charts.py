@@ -17,14 +17,13 @@ from __future__ import annotations
 from typing import Dict
 
 import pytest
+from tests.browser.checks import validate_sample_html
+from tests.samples.fixtures import HERO_CHART_TYPES, make_chart
+from tests.samples.paths import ARTIFACTS_HTML_DIR, html_artifact_path
 
 from vizly.config import reset_config
 from vizly.maps import reset_opt_in_maps
 from vizly.theme.registry import reset_registry
-
-from tests.browser.checks import validate_sample_html
-from tests.samples.fixtures import HERO_CHART_TYPES, make_chart
-from tests.samples.paths import ARTIFACTS_HTML_DIR, html_artifact_path
 
 pytestmark = pytest.mark.browser
 

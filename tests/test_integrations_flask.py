@@ -7,9 +7,15 @@ import pytest
 
 pytest.importorskip("flask")
 
-import vizly as vz
 from examples.flask_app import app
-from vizly.integrations.flask import assets_html, chart_html, chart_response, dashboard_html
+
+import vizly as vz
+from vizly.integrations.flask import (
+    assets_html,
+    chart_html,
+    chart_response,
+    dashboard_html,
+)
 from vizly.render import LOCAL_ASSET_MARKER
 
 

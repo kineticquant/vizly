@@ -225,7 +225,7 @@ class MixChart(BaseChart):
 
     def _build(self) -> Dict[str, Any]:
         df = prepare_frame(self.data)
-        from vizly.data import resolve_y_columns, require_columns
+        from vizly.data import require_columns, resolve_y_columns
 
         bar_cols = resolve_y_columns(self.bar) if self.bar is not None else []
         line_cols = resolve_y_columns(self.line) if self.line is not None else []
@@ -342,11 +342,11 @@ class PageChart(BaseChart):
         import uuid
 
         from vizly.render import (
+            _escape_html,
             assert_html_trust_safe,
             build_script_tags,
             echarts_locale,
             sanitize_css_size,
-            _escape_html,
         )
 
         need_gl, plugins, maps = _aggregate_child_render_deps(self.charts)
@@ -477,11 +477,11 @@ class TabChart(BaseChart):
         import uuid
 
         from vizly.render import (
+            _escape_html,
             assert_html_trust_safe,
             build_script_tags,
             echarts_locale,
             sanitize_css_size,
-            _escape_html,
         )
 
         need_gl, plugins, maps = _aggregate_child_render_deps(self.charts)

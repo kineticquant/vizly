@@ -7,10 +7,10 @@ import pytest
 
 pytest.importorskip("fastapi")
 
+from examples.fastapi_app import app
 from fastapi.testclient import TestClient
 
 import vizly as vz
-from examples.fastapi_app import app
 from vizly.integrations.fastapi import html_response, json_response
 from vizly.render import LOCAL_ASSET_MARKER
 

@@ -47,6 +47,10 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           repository-url: https://test.pypi.org/legacy/
+      - name: Skip notice (TestPyPI)
+        if: ${{ vars.ENABLE_TESTPYPI_PUBLISH != 'true' }}
+        run: |
+          echo "::notice::ENABLE_TESTPYPI_PUBLISH is not true — upload skipped (job still green)."
 
   publish-pypi:
     needs: build
@@ -60,6 +64,12 @@ jobs:
         with:
           name: dist
           path: dist/
+      - name: Require ENABLE_PYPI_PUBLISH
+        if: ${{ vars.ENABLE_PYPI_PUBLISH != 'true' }}
+        run: |
+          echo "::error::ENABLE_PYPI_PUBLISH is not true. Dist was built but not uploaded to PyPI."
+          echo "Set repo variable ENABLE_PYPI_PUBLISH=true, then re-run this workflow on the tag."
+          exit 1
       - name: Publish to PyPI (Trusted Publishing)
         if: ${{ vars.ENABLE_PYPI_PUBLISH == 'true' }}
         uses: pypa/gh-action-pypi-publish@release/v1

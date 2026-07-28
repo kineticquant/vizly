@@ -32,10 +32,10 @@ Do the same on [test.pypi.org](https://test.pypi.org) with environment `testpypi
 
 | Variable | Value | Effect |
 |----------|-------|--------|
-| `ENABLE_TESTPYPI_PUBLISH` | `true` | Tag/dispatch may upload to TestPyPI |
-| `ENABLE_PYPI_PUBLISH` | `true` | Tag/dispatch may upload to PyPI |
+| `ENABLE_TESTPYPI_PUBLISH` | `true` | Tag/dispatch may upload to TestPyPI (optional; skip is green) |
+| `ENABLE_PYPI_PUBLISH` | `true` | **Required** for a production upload; without it the `publish-pypi` job fails |
 
-Leave them unset/`false` until the pending publisher is configured — the workflow will still **build + twine check** on every `v*` tag.
+Leave `ENABLE_PYPI_PUBLISH` unset until Trusted Publishing is ready. A green **GitHub Environment deployment** for `pypi` only means the job ran — check the **Publish to PyPI** step (and [pypi.org/project/vizly](https://pypi.org/project/vizly/)) to confirm the upload. This workflow does **not** create a GitHub Release.
 
 ## Each release
 

@@ -28,9 +28,7 @@ pip install vizly
 
 Framework extras (install only what you use): `vizly[streamlit]`, `vizly[fastapi]`, `vizly[flask]`, `vizly[django]`.
 
-### Export (deferred)
-
-PNG/PDF snapshot export (`vizly[export]`) is **not** shipped yet. ECharts draws in JavaScript, so image export needs a JS canvas runtime (Node + `node-canvas` per Apache’s SSR guide, or a headless browser), not a pure-Python conversion of the option dict. Use `to_html()` / `to_option()` meanwhile.
+HTMX helpers (`vizly.integrations.htmx`) ship in the base package. No `vizly[htmx]` extra.
 
 ## 30-second example
 
@@ -200,12 +198,6 @@ from vizly.integrations.htmx import htmx_chart_fragment, htmx_or_full
 
 Open `examples/jupyter_gallery.ipynb`: charts display via `_repr_html_()`.
 
-## Known limitations
-
-- **SPA / JSON + maps:** `to_option()` / `json_response` return the ECharts option only. They do **not** embed GeoJSON. HTML rendering calls `echarts.registerMap` for you; SPA clients must register map packs themselves (or use HTML embeds).
-- **PNG/PDF export:** not shipped yet (see Install).
-- **page / tab JSON:** `to_option()` returns a compose descriptor under `_vizly_compose` (child options). Use HTML embeds (`dashboard_html` / `to_html`) for browser layout.
-
 ## Less boilerplate than raw option builders
 
 **Verbose option-builder style (illustrative):** many nested calls for series, axes, tooltip, and theme (~15-25 lines).
@@ -250,3 +242,9 @@ python -m pytest -m "not browser" -v
 Refresh option goldens: `python scripts/update_sample_goldens.py`
 
 Full testing runbook: **[TESTING.md](TESTING.md)**. Also [CHANGELOG.md](CHANGELOG.md) and [RELEASE.md](RELEASE.md).
+
+## Known limitations
+
+- **SPA / JSON + maps:** `to_option()` / `json_response` return the ECharts option only. They do **not** embed GeoJSON. HTML rendering calls `echarts.registerMap` for you; SPA clients must register map packs themselves (or use HTML embeds).
+- **page / tab JSON:** `to_option()` returns a compose descriptor under `_vizly_compose` (child options). Use HTML embeds (`dashboard_html` / `to_html`) for browser layout.
+- **PNG/PDF export (deferred):** `vizly[export]` is **not** shipped yet. ECharts draws in JavaScript, so image export needs a JS canvas runtime (Node + `node-canvas` per Apache’s SSR guide, or a headless browser), not a pure-Python conversion of the option dict. Use `to_html()` / `to_option()` meanwhile.

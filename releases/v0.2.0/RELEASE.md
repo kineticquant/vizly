@@ -170,12 +170,12 @@ Shared embed contract in `vizly.integrations`:
 | **FastAPI** | `html_response`, `json_response`, `dashboard_response` |
 | **Flask** | `assets_html`, `chart_html`, `dashboard_response` |
 | **Django** | `{% vizly_assets charts=… %}`, `{% vizly_chart … %}`, `{% vizly_dashboard … %}`, `{{ chart\|vizly_html }}` |
-| **HTMX** | `htmx_chart_fragment`, `htmx_or_full` (fragments default `include_assets=False`) |
+| **HTMX** | `htmx_chart_fragment`, `htmx_or_full` in the base package (no `vizly[htmx]` extra; fragments default `include_assets=False`) |
 | **Jupyter** | `_repr_html_()` on chart objects |
 
 Django `vizly_chart` / `vizly_html` default to fragments **without** reloading ECharts.
 
-Install extras: `vizly[streamlit]`, `vizly[fastapi]`, `vizly[flask]`, `vizly[django]`, `vizly[examples]`.
+Install extras: `vizly[streamlit]`, `vizly[fastapi]`, `vizly[flask]`, `vizly[django]`, `vizly[examples]`. HTMX helpers ship in the base package (no `vizly[htmx]` extra).
 
 Examples: `examples/streamlit_app.py`, `fastapi_app.py`, `flask_app.py`, `django_demo/`, `htmx_demo/app.py`, `jupyter_gallery.ipynb`.
 
@@ -238,6 +238,8 @@ pip install -e ".[dev,examples]"
 ```
 
 Optional extras: `dev`, `browser`, `streamlit`, `fastapi`, `flask`, `django`, `examples`.
+
+HTMX helpers (`vizly.integrations.htmx`) ship in the base package. No `vizly[htmx]` extra.
 
 ---
 

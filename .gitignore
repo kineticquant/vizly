@@ -179,3 +179,10 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+
+# Local working notes / planning — NEVER commit anything under this tree
+# (covers all files and subdirs; do not force-add)
+.working_sessions/
+
+# Generated sample-chart HTML (see implementation plan §16 Level 2)
+artifacts/

@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "vizly"
 version = "0.2.0"
 authors = [{ name = "Kineticquant" }]
-description = "Fully themable, low-boilerplate charting over Apache ECharts"
+description = "High-performance, low-boilerplate, fully-themable Python charting over Apache ECharts (local assets, native web embeds)."
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "MIT" }

@@ -5,24 +5,75 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "vizly"
 version = "0.1.0"
-authors = [
-    { name="Your Name", email="your.email@example.com" }
-]
-description = "An aesthetics-first, zero-config interactive plotting wrapper over ECharts"
+authors = [{ name = "Kineticquant" }]
+description = "Fully themable, low-boilerplate charting over Apache ECharts"
 readme = "README.md"
 requires-python = ">=3.9"
+license = { text = "MIT" }
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Framework :: Jupyter",
- ]
-dependencies = [
-    "pandas>=1.5.0",
-    "numpy>=1.22.0",
-    "pyecharts>=2.0.0"
 ]
+[project.urls]
+Homepage = "https://github.com/kineticquant/vizly"
+Changelog = "https://github.com/kineticquant/vizly/blob/main/CHANGELOG.md"
+Issues = "https://github.com/kineticquant/vizly/issues"
+
+[project.optional-dependencies]
+dev = ["pytest", "pytest-cov", "ruff", "mypy", "build", "twine"]
+browser = ["playwright>=1.40"]
+streamlit = ["streamlit"]
+fastapi = ["fastapi", "uvicorn", "httpx"]
+flask = ["flask"]
+django = ["django"]
+examples = [
+    "streamlit",
+    "fastapi",
+    "uvicorn",
+    "httpx",
+    "flask",
+    "django",
+]
+# Snapshot/PNG/PDF export is deferred until a stable headless stack is chosen.
+# export = []
+
+[tool.setuptools.package-dir]
+"" = "src"
 
 [tool.setuptools.packages.find]
-where = ["."]
+where = ["src"]
 include = ["vizly*"]
+
+[tool.setuptools.package-data]
+vizly = [
+    "assets/*.js",
+    "assets/*.md",
+    "assets/maps/*.json",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+markers = [
+    "samples: Level 2 sample/golden chart suite (HTML artifacts + option goldens)",
+    "browser: Level 3 Playwright visual smoke (hero charts; not a per-commit gate)",
+]
+
+[tool.coverage.run]
+branch = true
+source = ["vizly"]
+omit = [
+    "*/vizly/assets/*",
+    "*/vizly/integrations/django/templatetags/*",
+]
+
+[tool.coverage.report]
+show_missing = true
+skip_empty = true
+# Core-module gate is applied in CI via --include (theme/data/base/api).
+fail_under = 0
+
+[tool.ruff]
+src = ["src", "tests", "examples"]

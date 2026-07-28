@@ -27,9 +27,11 @@
     {
       "data": [
         0.0,
-        100.0,
         120.0,
-        110.0
+        165.0,
+        175.0,
+        163.0,
+        163.0
       ],
       "emphasis": {
         "itemStyle": {
@@ -47,10 +49,12 @@
     },
     {
       "data": [
-        100.0,
-        40.0,
+        120.0,
+        45.0,
+        28.0,
         null,
-        null
+        null,
+        0.0
       ],
       "name": "Increase",
       "stack": "total",
@@ -60,8 +64,10 @@
       "data": [
         null,
         null,
-        20.0,
-        10.0
+        null,
+        18.0,
+        12.0,
+        null
       ],
       "name": "Decrease",
       "stack": "total",
@@ -73,6 +79,7 @@
     "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
   },
   "title": {
+    "text": "ARR bridge",
     "textStyle": {
       "color": "#111827",
       "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",
@@ -98,10 +105,12 @@
       }
     },
     "data": [
-      "Start",
-      "Sales",
-      "Cost",
-      "Tax"
+      "Starting ARR",
+      "New logos",
+      "Expansion",
+      "Churn",
+      "Discount",
+      "Ending ARR"
     ],
     "nameTextStyle": {
       "color": "#374151"

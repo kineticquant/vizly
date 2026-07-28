@@ -14,8 +14,9 @@
   ],
   "legend": {
     "data": [
-      "A",
-      "B"
+      "Atlas",
+      "Nova",
+      "Pulse"
     ],
     "show": true,
     "textStyle": {
@@ -26,16 +27,24 @@
   "radar": {
     "indicator": [
       {
-        "max": 88.0,
+        "max": 104.50000000000001,
         "name": "speed"
       },
       {
-        "max": 99.00000000000001,
+        "max": 100.10000000000001,
         "name": "power"
       },
       {
-        "max": 77.0,
+        "max": 95.7,
         "name": "range"
+      },
+      {
+        "max": 99.00000000000001,
+        "name": "accuracy"
+      },
+      {
+        "max": 96.80000000000001,
+        "name": "efficiency"
       }
     ]
   },
@@ -43,19 +52,33 @@
     {
       "data": [
         {
-          "name": "A",
+          "name": "Atlas",
           "value": [
-            80,
-            60,
+            88,
+            76,
+            81,
+            90,
             70
           ]
         },
         {
-          "name": "B",
+          "name": "Nova",
           "value": [
-            70,
-            90,
-            50
+            72,
+            91,
+            64,
+            85,
+            88
+          ]
+        },
+        {
+          "name": "Pulse",
+          "value": [
+            95,
+            68,
+            87,
+            78,
+            82
           ]
         }
       ],
@@ -67,6 +90,7 @@
     "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
   },
   "title": {
+    "text": "Capability radar",
     "textStyle": {
       "color": "#F1F5F9",
       "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",

@@ -22,34 +22,97 @@
   "parallelAxis": [
     {
       "dim": 0,
-      "name": "a"
+      "name": "latency"
     },
     {
       "dim": 1,
-      "name": "b"
+      "name": "throughput"
     },
     {
       "dim": 2,
-      "name": "c"
+      "name": "errors"
+    },
+    {
+      "dim": 3,
+      "name": "cpu"
+    },
+    {
+      "dim": 4,
+      "name": "memory"
     }
   ],
   "series": [
     {
       "data": [
         [
-          1,
-          4,
-          7
+          12,
+          820,
+          0.2,
+          34,
+          48
         ],
         [
-          2,
-          5,
-          8
+          18,
+          640,
+          1.1,
+          51,
+          62
         ],
         [
-          3,
-          6,
-          9
+          9,
+          910,
+          0.1,
+          28,
+          41
+        ],
+        [
+          28,
+          420,
+          3.4,
+          78,
+          88
+        ],
+        [
+          15,
+          760,
+          0.6,
+          42,
+          55
+        ],
+        [
+          22,
+          580,
+          1.8,
+          63,
+          71
+        ],
+        [
+          11,
+          880,
+          0.3,
+          31,
+          39
+        ],
+        [
+          31,
+          390,
+          4.1,
+          86,
+          92
+        ],
+        [
+          17,
+          700,
+          0.9,
+          47,
+          58
+        ],
+        [
+          8,
+          950,
+          0.05,
+          22,
+          36
         ]
       ],
       "type": "parallel"
@@ -60,6 +123,7 @@
     "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
   },
   "title": {
+    "text": "Service profiles",
     "textStyle": {
       "color": "#111827",
       "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",

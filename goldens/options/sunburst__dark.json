@@ -25,12 +25,24 @@
         {
           "children": [
             {
-              "name": "Child",
-              "value": 4
+              "name": "Platform",
+              "value": 40
+            },
+            {
+              "name": "Analytics",
+              "value": 28
+            },
+            {
+              "name": "Integrations",
+              "value": 24
+            },
+            {
+              "name": "Docs",
+              "value": 16
             }
           ],
-          "name": "Root",
-          "value": 10
+          "name": "Product",
+          "value": 100
         }
       ],
       "radius": [
@@ -45,6 +57,7 @@
     "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
   },
   "title": {
+    "text": "Product tree",
     "textStyle": {
       "color": "#F1F5F9",
       "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",

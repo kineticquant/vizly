@@ -23,33 +23,75 @@
     {
       "data": [
         {
-          "name": "A"
+          "name": "Traffic"
         },
         {
-          "name": "B"
+          "name": "Organic"
         },
         {
-          "name": "X"
+          "name": "Paid"
         },
         {
-          "name": "Y"
+          "name": "Referral"
+        },
+        {
+          "name": "Signup"
+        },
+        {
+          "name": "Trial"
+        },
+        {
+          "name": "Churn"
+        },
+        {
+          "name": "Paid plan"
         }
       ],
       "links": [
         {
-          "source": "A",
-          "target": "X",
-          "value": 5
+          "source": "Traffic",
+          "target": "Organic",
+          "value": 48
         },
         {
-          "source": "A",
-          "target": "Y",
-          "value": 3
+          "source": "Traffic",
+          "target": "Paid",
+          "value": 32
         },
         {
-          "source": "B",
-          "target": "Y",
-          "value": 2
+          "source": "Traffic",
+          "target": "Referral",
+          "value": 20
+        },
+        {
+          "source": "Organic",
+          "target": "Signup",
+          "value": 36
+        },
+        {
+          "source": "Paid",
+          "target": "Signup",
+          "value": 24
+        },
+        {
+          "source": "Referral",
+          "target": "Signup",
+          "value": 14
+        },
+        {
+          "source": "Signup",
+          "target": "Trial",
+          "value": 42
+        },
+        {
+          "source": "Signup",
+          "target": "Churn",
+          "value": 12
+        },
+        {
+          "source": "Trial",
+          "target": "Paid plan",
+          "value": 30
         }
       ],
       "type": "sankey"
@@ -60,6 +102,7 @@
     "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
   },
   "title": {
+    "text": "Acquisition flow",
     "textStyle": {
       "color": "#F1F5F9",
       "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",

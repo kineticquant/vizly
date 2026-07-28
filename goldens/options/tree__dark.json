@@ -25,11 +25,41 @@
         {
           "children": [
             {
+              "children": [
+                {
+                  "children": [],
+                  "name": "Charts"
+                },
+                {
+                  "children": [],
+                  "name": "Maps"
+                }
+              ],
+              "name": "Platform"
+            },
+            {
               "children": [],
-              "name": "Child"
+              "name": "Analytics"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "name": "Streamlit"
+                },
+                {
+                  "children": [],
+                  "name": "FastAPI"
+                }
+              ],
+              "name": "Integrations"
+            },
+            {
+              "children": [],
+              "name": "Docs"
             }
           ],
-          "name": "Root"
+          "name": "Product"
         }
       ],
       "label": {
@@ -45,6 +75,7 @@
     "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
   },
   "title": {
+    "text": "Product tree",
     "textStyle": {
       "color": "#F1F5F9",
       "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",

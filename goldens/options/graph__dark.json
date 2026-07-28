@@ -23,19 +23,35 @@
     {
       "data": [
         {
-          "name": "A",
+          "name": "Traffic",
           "symbolSize": 20
         },
         {
-          "name": "B",
+          "name": "Organic",
           "symbolSize": 20
         },
         {
-          "name": "X",
+          "name": "Paid",
           "symbolSize": 20
         },
         {
-          "name": "Y",
+          "name": "Referral",
+          "symbolSize": 20
+        },
+        {
+          "name": "Signup",
+          "symbolSize": 20
+        },
+        {
+          "name": "Trial",
+          "symbolSize": 20
+        },
+        {
+          "name": "Churn",
+          "symbolSize": 20
+        },
+        {
+          "name": "Paid plan",
           "symbolSize": 20
         }
       ],
@@ -48,18 +64,48 @@
       "layout": "force",
       "links": [
         {
-          "source": "A",
-          "target": "X",
+          "source": "Traffic",
+          "target": "Organic",
           "value": 1
         },
         {
-          "source": "A",
-          "target": "Y",
+          "source": "Traffic",
+          "target": "Paid",
           "value": 1
         },
         {
-          "source": "B",
-          "target": "Y",
+          "source": "Traffic",
+          "target": "Referral",
+          "value": 1
+        },
+        {
+          "source": "Organic",
+          "target": "Signup",
+          "value": 1
+        },
+        {
+          "source": "Paid",
+          "target": "Signup",
+          "value": 1
+        },
+        {
+          "source": "Referral",
+          "target": "Signup",
+          "value": 1
+        },
+        {
+          "source": "Signup",
+          "target": "Trial",
+          "value": 1
+        },
+        {
+          "source": "Signup",
+          "target": "Churn",
+          "value": 1
+        },
+        {
+          "source": "Trial",
+          "target": "Paid plan",
           "value": 1
         }
       ],
@@ -72,6 +118,7 @@
     "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
   },
   "title": {
+    "text": "Acquisition graph",
     "textStyle": {
       "color": "#F1F5F9",
       "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",

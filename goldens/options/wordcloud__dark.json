@@ -23,16 +23,52 @@
     {
       "data": [
         {
-          "name": "A",
-          "value": 10
+          "name": "latency",
+          "value": 96
         },
         {
-          "name": "B",
-          "value": 20
+          "name": "throughput",
+          "value": 88
         },
         {
-          "name": "C",
-          "value": 30
+          "name": "dashboard",
+          "value": 74
+        },
+        {
+          "name": "alert",
+          "value": 69
+        },
+        {
+          "name": "pipeline",
+          "value": 61
+        },
+        {
+          "name": "theme",
+          "value": 55
+        },
+        {
+          "name": "embed",
+          "value": 50
+        },
+        {
+          "name": "streamlit",
+          "value": 47
+        },
+        {
+          "name": "fastapi",
+          "value": 44
+        },
+        {
+          "name": "heatmap",
+          "value": 40
+        },
+        {
+          "name": "sankey",
+          "value": 36
+        },
+        {
+          "name": "geo",
+          "value": 31
         }
       ],
       "gridSize": 8,
@@ -49,6 +85,7 @@
     "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
   },
   "title": {
+    "text": "Topic cloud",
     "textStyle": {
       "color": "#F1F5F9",
       "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",

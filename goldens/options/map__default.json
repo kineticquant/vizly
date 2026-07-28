@@ -24,15 +24,43 @@
       "data": [
         {
           "name": "United States",
-          "value": 40
+          "value": 92
         },
         {
           "name": "Canada",
-          "value": 20
+          "value": 54
         },
         {
           "name": "Brazil",
-          "value": 25
+          "value": 61
+        },
+        {
+          "name": "Germany",
+          "value": 48
+        },
+        {
+          "name": "United Kingdom",
+          "value": 57
+        },
+        {
+          "name": "France",
+          "value": 44
+        },
+        {
+          "name": "India",
+          "value": 73
+        },
+        {
+          "name": "Japan",
+          "value": 66
+        },
+        {
+          "name": "Australia",
+          "value": 39
+        },
+        {
+          "name": "South Africa",
+          "value": 28
         }
       ],
       "emphasis": {
@@ -50,6 +78,7 @@
     "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
   },
   "title": {
+    "text": "Global demand",
     "textStyle": {
       "color": "#111827",
       "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",
@@ -68,8 +97,8 @@
   "visualMap": {
     "calculable": true,
     "left": "left",
-    "max": 40,
-    "min": 20,
+    "max": 92,
+    "min": 28,
     "top": "bottom"
   }
 }

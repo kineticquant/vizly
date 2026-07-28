@@ -34,7 +34,7 @@
       "data": [
         {
           "name": "NYC",
-          "symbolSize": 10.0,
+          "symbolSize": 64.0,
           "value": [
             -74.0,
             40.7
@@ -42,7 +42,7 @@
         },
         {
           "name": "LA",
-          "symbolSize": 20.0,
+          "symbolSize": 64.0,
           "value": [
             -118.2,
             34.0
@@ -50,10 +50,50 @@
         },
         {
           "name": "Chicago",
-          "symbolSize": 15.0,
+          "symbolSize": 61.0,
           "value": [
             -87.6,
             41.9
+          ]
+        },
+        {
+          "name": "Houston",
+          "symbolSize": 55.0,
+          "value": [
+            -95.4,
+            29.8
+          ]
+        },
+        {
+          "name": "Miami",
+          "symbolSize": 49.0,
+          "value": [
+            -80.2,
+            25.8
+          ]
+        },
+        {
+          "name": "Seattle",
+          "symbolSize": 64.0,
+          "value": [
+            -122.3,
+            47.6
+          ]
+        },
+        {
+          "name": "Denver",
+          "symbolSize": 42.0,
+          "value": [
+            -104.9,
+            39.7
+          ]
+        },
+        {
+          "name": "Boston",
+          "symbolSize": 58.0,
+          "value": [
+            -71.1,
+            42.4
           ]
         }
       ],
@@ -66,6 +106,7 @@
     "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
   },
   "title": {
+    "text": "City demand",
     "textStyle": {
       "color": "#F1F5F9",
       "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",

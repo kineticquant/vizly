@@ -25,16 +25,24 @@
     {
       "data": [
         {
-          "name": "A",
+          "name": "Enterprise",
+          "value": 34
+        },
+        {
+          "name": "Mid-market",
+          "value": 26
+        },
+        {
+          "name": "SMB",
+          "value": 18
+        },
+        {
+          "name": "Startup",
+          "value": 12
+        },
+        {
+          "name": "Partner",
           "value": 10
-        },
-        {
-          "name": "B",
-          "value": 20
-        },
-        {
-          "name": "C",
-          "value": 30
         }
       ],
       "label": {
@@ -49,6 +57,7 @@
     "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
   },
   "title": {
+    "text": "Segment mix",
     "textStyle": {
       "color": "#F1F5F9",
       "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",

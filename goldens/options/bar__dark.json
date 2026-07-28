@@ -26,9 +26,12 @@
     {
       "barMaxWidth": 48,
       "data": [
-        3,
-        5,
-        2
+        86,
+        64,
+        71,
+        58,
+        93,
+        47
       ],
       "label": {
         "show": false
@@ -42,6 +45,7 @@
     "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
   },
   "title": {
+    "text": "Sales by region",
     "textStyle": {
       "color": "#F1F5F9",
       "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",
@@ -67,9 +71,12 @@
       }
     },
     "data": [
-      "East",
+      "Northeast",
+      "Southeast",
+      "Midwest",
+      "Southwest",
       "West",
-      "South"
+      "Canada"
     ],
     "nameTextStyle": {
       "color": "#CBD5E1"

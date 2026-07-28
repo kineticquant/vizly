@@ -1,9 +1,12 @@
 {
   "angleAxis": {
     "data": [
-      "East",
+      "Northeast",
+      "Southeast",
+      "Midwest",
+      "Southwest",
       "West",
-      "South"
+      "Canada"
     ],
     "type": "category"
   },
@@ -33,9 +36,12 @@
     {
       "coordinateSystem": "polar",
       "data": [
-        3,
-        5,
-        2
+        86,
+        64,
+        71,
+        58,
+        93,
+        47
       ],
       "name": "sales",
       "type": "bar"
@@ -46,6 +52,7 @@
     "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
   },
   "title": {
+    "text": "Sales by region",
     "textStyle": {
       "color": "#F1F5F9",
       "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",

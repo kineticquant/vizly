@@ -1,8 +1,9 @@
 {
   "_vizly_compose": {
     "labels": [
-      "bar",
-      "pie"
+      "Sales by region",
+      "Segment mix",
+      "Capability radar"
     ],
     "options": [
       {
@@ -33,9 +34,12 @@
           {
             "barMaxWidth": 48,
             "data": [
-              3,
-              5,
-              2
+              86,
+              64,
+              71,
+              58,
+              93,
+              47
             ],
             "label": {
               "show": false
@@ -49,6 +53,7 @@
           "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
         },
         "title": {
+          "text": "Sales by region",
           "textStyle": {
             "color": "#111827",
             "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",
@@ -74,9 +79,12 @@
             }
           },
           "data": [
-            "East",
+            "Northeast",
+            "Southeast",
+            "Midwest",
+            "Southwest",
             "West",
-            "South"
+            "Canada"
           ],
           "nameTextStyle": {
             "color": "#374151"
@@ -139,16 +147,24 @@
           {
             "data": [
               {
-                "name": "A",
+                "name": "Enterprise",
+                "value": 34
+              },
+              {
+                "name": "Mid-market",
+                "value": 26
+              },
+              {
+                "name": "SMB",
+                "value": 18
+              },
+              {
+                "name": "Startup",
+                "value": 12
+              },
+              {
+                "name": "Partner",
                 "value": 10
-              },
-              {
-                "name": "B",
-                "value": 20
-              },
-              {
-                "name": "C",
-                "value": 30
               }
             ],
             "label": {
@@ -163,6 +179,7 @@
           "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
         },
         "title": {
+          "text": "Segment mix",
           "textStyle": {
             "color": "#111827",
             "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",
@@ -177,6 +194,114 @@
             "color": "#111827"
           },
           "trigger": "item"
+        }
+      },
+      {
+        "animation": true,
+        "animationDuration": 400,
+        "backgroundColor": "#FFFFFF",
+        "color": [
+          "#0B1F33",
+          "#2F6FED",
+          "#12A594",
+          "#E2A03F",
+          "#D64545",
+          "#7C8C9E",
+          "#5B4B8A",
+          "#2D9CDB"
+        ],
+        "legend": {
+          "data": [
+            "Atlas",
+            "Nova",
+            "Pulse"
+          ],
+          "show": true,
+          "textStyle": {
+            "color": "#374151"
+          },
+          "top": "2%"
+        },
+        "radar": {
+          "indicator": [
+            {
+              "max": 104.50000000000001,
+              "name": "speed"
+            },
+            {
+              "max": 100.10000000000001,
+              "name": "power"
+            },
+            {
+              "max": 95.7,
+              "name": "range"
+            },
+            {
+              "max": 99.00000000000001,
+              "name": "accuracy"
+            },
+            {
+              "max": 96.80000000000001,
+              "name": "efficiency"
+            }
+          ]
+        },
+        "series": [
+          {
+            "data": [
+              {
+                "name": "Atlas",
+                "value": [
+                  88,
+                  76,
+                  81,
+                  90,
+                  70
+                ]
+              },
+              {
+                "name": "Nova",
+                "value": [
+                  72,
+                  91,
+                  64,
+                  85,
+                  88
+                ]
+              },
+              {
+                "name": "Pulse",
+                "value": [
+                  95,
+                  68,
+                  87,
+                  78,
+                  82
+                ]
+              }
+            ],
+            "type": "radar"
+          }
+        ],
+        "textStyle": {
+          "color": "#111827",
+          "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
+        },
+        "title": {
+          "text": "Capability radar",
+          "textStyle": {
+            "color": "#111827",
+            "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",
+            "fontWeight": 600
+          }
+        },
+        "tooltip": {
+          "backgroundColor": "rgba(255,255,255,0.96)",
+          "borderColor": "#E5E7EB",
+          "borderWidth": 1,
+          "textStyle": {
+            "color": "#111827"
+          }
         }
       }
     ],
@@ -207,7 +332,7 @@
     "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
   },
   "title": {
-    "text": "tab",
+    "text": "Tab showcase",
     "textStyle": {
       "color": "#111827",
       "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",

@@ -17,7 +17,8 @@
         ],
         "legend": {
           "data": [
-            "revenue"
+            "revenue",
+            "cost"
           ],
           "show": true,
           "textStyle": {
@@ -28,14 +29,51 @@
         "series": [
           {
             "data": [
-              10,
-              20,
-              15
+              42,
+              48,
+              45,
+              61,
+              58,
+              72,
+              68,
+              81,
+              76,
+              90,
+              84,
+              95,
+              88,
+              102
             ],
             "label": {
               "show": false
             },
             "name": "revenue",
+            "showSymbol": true,
+            "smooth": true,
+            "symbolSize": 6,
+            "type": "line"
+          },
+          {
+            "data": [
+              18,
+              20,
+              19,
+              24,
+              22,
+              28,
+              26,
+              31,
+              29,
+              34,
+              32,
+              37,
+              35,
+              40
+            ],
+            "label": {
+              "show": false
+            },
+            "name": "cost",
             "showSymbol": true,
             "smooth": true,
             "symbolSize": 6,
@@ -47,6 +85,7 @@
           "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
         },
         "title": {
+          "text": "Revenue vs cost",
           "textStyle": {
             "color": "#F1F5F9",
             "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",
@@ -74,7 +113,18 @@
           "data": [
             "2026-01-01T00:00:00",
             "2026-01-02T00:00:00",
-            "2026-01-03T00:00:00"
+            "2026-01-03T00:00:00",
+            "2026-01-04T00:00:00",
+            "2026-01-05T00:00:00",
+            "2026-01-06T00:00:00",
+            "2026-01-07T00:00:00",
+            "2026-01-08T00:00:00",
+            "2026-01-09T00:00:00",
+            "2026-01-10T00:00:00",
+            "2026-01-11T00:00:00",
+            "2026-01-12T00:00:00",
+            "2026-01-13T00:00:00",
+            "2026-01-14T00:00:00"
           ],
           "nameTextStyle": {
             "color": "#CBD5E1"
@@ -137,16 +187,24 @@
           {
             "data": [
               {
-                "name": "A",
+                "name": "Enterprise",
+                "value": 34
+              },
+              {
+                "name": "Mid-market",
+                "value": 26
+              },
+              {
+                "name": "SMB",
+                "value": 18
+              },
+              {
+                "name": "Startup",
+                "value": 12
+              },
+              {
+                "name": "Partner",
                 "value": 10
-              },
-              {
-                "name": "B",
-                "value": 20
-              },
-              {
-                "name": "C",
-                "value": 30
               }
             ],
             "label": {
@@ -161,6 +219,7 @@
           "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
         },
         "title": {
+          "text": "Segment mix",
           "textStyle": {
             "color": "#F1F5F9",
             "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",
@@ -175,6 +234,110 @@
             "color": "#E2E8F0"
           },
           "trigger": "item"
+        }
+      },
+      {
+        "animation": true,
+        "animationDuration": 400,
+        "backgroundColor": "#0F172A",
+        "color": [
+          "#93C5FD",
+          "#5EEAD4",
+          "#FCD34D",
+          "#FCA5A5",
+          "#C4B5FD",
+          "#86EFAC",
+          "#FDBA74",
+          "#A5B4FC"
+        ],
+        "legend": {
+          "show": true,
+          "textStyle": {
+            "color": "#CBD5E1"
+          },
+          "top": "2%"
+        },
+        "series": [
+          {
+            "data": [
+              {
+                "name": "United States",
+                "value": 92
+              },
+              {
+                "name": "Canada",
+                "value": 54
+              },
+              {
+                "name": "Brazil",
+                "value": 61
+              },
+              {
+                "name": "Germany",
+                "value": 48
+              },
+              {
+                "name": "United Kingdom",
+                "value": 57
+              },
+              {
+                "name": "France",
+                "value": 44
+              },
+              {
+                "name": "India",
+                "value": 73
+              },
+              {
+                "name": "Japan",
+                "value": 66
+              },
+              {
+                "name": "Australia",
+                "value": 39
+              },
+              {
+                "name": "South Africa",
+                "value": 28
+              }
+            ],
+            "emphasis": {
+              "label": {
+                "show": true
+              }
+            },
+            "map": "world",
+            "roam": true,
+            "type": "map"
+          }
+        ],
+        "textStyle": {
+          "color": "#E2E8F0",
+          "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
+        },
+        "title": {
+          "text": "Global demand",
+          "textStyle": {
+            "color": "#F1F5F9",
+            "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",
+            "fontWeight": 600
+          }
+        },
+        "tooltip": {
+          "backgroundColor": "rgba(15,23,42,0.96)",
+          "borderColor": "#334155",
+          "borderWidth": 1,
+          "textStyle": {
+            "color": "#E2E8F0"
+          },
+          "trigger": "item"
+        },
+        "visualMap": {
+          "calculable": true,
+          "left": "left",
+          "max": 92,
+          "min": 28,
+          "top": "bottom"
         }
       }
     ],
@@ -205,7 +368,7 @@
     "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
   },
   "title": {
-    "text": "page",
+    "text": "Page showcase",
     "textStyle": {
       "color": "#F1F5F9",
       "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",

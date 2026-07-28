@@ -22,10 +22,10 @@
   "series": [
     {
       "data": [
-        0.55
+        0.72
       ],
       "label": {
-        "formatter": "55%"
+        "formatter": "72%"
       },
       "type": "liquidFill"
     }
@@ -35,6 +35,7 @@
     "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
   },
   "title": {
+    "text": "Fill level",
     "textStyle": {
       "color": "#F1F5F9",
       "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",

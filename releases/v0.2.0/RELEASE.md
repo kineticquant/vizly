@@ -38,19 +38,9 @@ Every chart factory lives on the `vizly` namespace (`import vizly as vz`).
 
 ## Chart inventory
 
-**39 registered types** across three bands. Use `vz.list_chart_types()` and `vz.list_unavailable_chart_types()`.
+**39 registered types.** Use `vz.list_chart_types()` and `vz.list_unavailable_chart_types()`.
 
-### Band A: core analytics
-
-`line`, `bar`, `area`, `scatter`, `pie`, `donut`, `boxplot`, `heatmap`, `candlestick`, `kline`, `radar`, `funnel`, `gauge`, `sankey`, `treemap`, `map`, `grid`, `mix`, `combo`
-
-### Band B: extended and compose
-
-`effect_scatter`, `waterfall`, `polar`, `parallel`, `sunburst`, `tree`, `graph`, `wordcloud`, `geo`, `bar3d`, `line3d`, `scatter3d`, `page`, `tab`, `timeline`
-
-### Band C: specialty
-
-`pictorial_bar`, `theme_river`, `liquid`, `surface3d`
+`line`, `bar`, `area`, `scatter`, `pie`, `donut`, `boxplot`, `heatmap`, `candlestick`, `kline`, `radar`, `funnel`, `gauge`, `sankey`, `treemap`, `map`, `grid`, `mix`, `combo`, `effect_scatter`, `waterfall`, `polar`, `parallel`, `sunburst`, `tree`, `graph`, `wordcloud`, `geo`, `bar3d`, `line3d`, `scatter3d`, `page`, `tab`, `timeline`, `pictorial_bar`, `theme_river`, `liquid`, `surface3d`
 
 ### Upstream unavailable
 

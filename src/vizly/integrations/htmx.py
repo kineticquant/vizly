@@ -7,6 +7,7 @@ in the parent page ``<head>`` once (see ``examples/htmx_demo``).
 
 from __future__ import annotations
 
+import json
 from typing import Mapping, Optional
 
 from vizly.base import BaseChart
@@ -36,9 +37,55 @@ def htmx_chart_fragment(
     )
 
 
+def htmx_event_listener_js(
+    url: str,
+    *,
+    target: str = "#vizly-detail",
+    swap: str = "innerHTML",
+    include: Optional[str] = None,
+) -> str:
+    """Return a ``<script>`` that POSTs ``vizly:event`` payloads via HTMX.
+
+    Put this once on the parent page (ECharts already loaded). Clicks do **not**
+    reload ECharts assets. The server receives JSON with the click payload.
+
+    Example parent page::
+
+        {{ assets_html()|safe }}
+        {{ htmx_event_listener_js('/chart/detail')|safe }}
+    """
+    url_json = json.dumps(url)
+    target_json = json.dumps(target)
+    swap_json = json.dumps(swap)
+    include_js = (
+        f"vals.include = {json.dumps(include)};"
+        if include
+        else ""
+    )
+    return f"""<script>
+(function() {{
+  if (window.__vizlyHtmxBound) return;
+  window.__vizlyHtmxBound = true;
+  window.addEventListener('vizly:event', function(ev) {{
+    var detail = ev.detail || {{}};
+    if (typeof htmx === 'undefined') {{
+      console.warn('vizly HTMX bridge: htmx is not loaded');
+      return;
+    }}
+    var vals = {{ vizly_event: JSON.stringify(detail) }};
+    {include_js}
+    htmx.ajax('POST', {url_json}, {{
+      target: {target_json},
+      swap: {swap_json},
+      values: vals
+    }});
+  }});
+}})();
+</script>"""
+
+
 def is_htmx_request(headers: Mapping[str, str]) -> bool:
     """True when the request carries the ``HX-Request`` header."""
-    # Support both WSGI environ style and normalized header maps.
     for key, value in headers.items():
         if key.lower().replace("_", "-") in {"hx-request", "http-hx-request"}:
             return str(value).lower() in {"true", "1", "yes"}

@@ -80,6 +80,8 @@ def chart_html(
     width: Optional[str] = None,
     height: Optional[str] = None,
     include_assets: bool = True,
+    message_origin: Optional[str] = None,
+    chart_id: Optional[str] = None,
 ) -> str:
     """Render a vizly chart to HTML (full document or fragment).
 
@@ -94,6 +96,9 @@ def chart_html(
         b = chart_html(c2, fragment=True, include_assets=False)
 
     Or use :func:`dashboard_html` / ``vz.page(...)``.
+
+    ``message_origin``: ``postMessage`` targetOrigin. Default is same-origin.
+    Pass ``"*"`` only for cross-origin embed bridges (e.g. Streamlit).
     """
     # Ensure map packs are loaded when HTML needs registerMap.
     if hasattr(chart, "_ensure_maps"):
@@ -103,6 +108,8 @@ def chart_html(
         width=width,
         height=height,
         include_assets=include_assets,
+        message_origin=message_origin,
+        chart_id=chart_id,
     )
 
 
@@ -115,19 +122,25 @@ def dashboard_html(
     height: Optional[str] = None,
     include_assets: bool = True,
     theme: Optional[ThemeLike] = None,
+    connect: bool = True,
+    message_origin: Optional[str] = None,
 ) -> str:
     """Render multiple charts with ECharts (+ maps/plugins) loaded once.
 
     Preferred helper for Flask/Django/FastAPI/Streamlit multi-chart pages.
+    ``connect=True`` links charts for shared tooltip / brush.
+    ``message_origin``: forwarded to each child click bridge (``None`` =
+    same-origin; pass ``"*"`` only for cross-origin bridges).
     """
     from vizly.charts.compose import PageChart
 
-    page = PageChart(charts=list(charts), title=title, theme=theme)
+    page = PageChart(charts=list(charts), title=title, theme=theme, connect=connect)
     return page.to_html(
         fragment=fragment,
         width=width,
         height=height,
         include_assets=include_assets,
+        message_origin=message_origin,
     )
 
 

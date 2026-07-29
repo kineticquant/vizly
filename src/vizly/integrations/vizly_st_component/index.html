@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    html, body, #frame { margin: 0; padding: 0; width: 100%; border: 0; }
+  </style>
+</head>
+<body>
+  <iframe id="frame" title="vizly" style="width:100%;border:0;"></iframe>
+  <script>
+    (function () {
+      // Minimal Streamlit component protocol (no external deps).
+      var Streamlit = window.parent !== window ? {
+        setFrameHeight: function (h) {
+          window.parent.postMessage({ isStreamlitMessage: true, type: "streamlit:setFrameHeight", height: h }, "*");
+        },
+        setComponentValue: function (value) {
+          window.parent.postMessage({ isStreamlitMessage: true, type: "streamlit:setComponentValue", value: value }, "*");
+        },
+        setComponentReady: function () {
+          window.parent.postMessage({ isStreamlitMessage: true, type: "streamlit:componentReady", apiVersion: 1 }, "*");
+        }
+      } : { setFrameHeight: function () {}, setComponentValue: function () {}, setComponentReady: function () {} };
+
+      var frame = document.getElementById("frame");
+      function render(html, height) {
+        frame.style.height = (height || 420) + "px";
+        frame.srcdoc = html;
+        Streamlit.setFrameHeight(height || 420);
+      }
+
+      window.addEventListener("message", function (event) {
+        var data = event.data;
+        if (!data) return;
+        if (data.source === "vizly") {
+          Streamlit.setComponentValue(data);
+          return;
+        }
+        // Streamlit render args
+        if (data.type === "streamlit:render") {
+          var args = data.args || {};
+          render(args.html || "", args.height || 420);
+        }
+      });
+
+      frame.addEventListener("load", function () {
+        try {
+          frame.contentWindow.addEventListener("message", function (e) {
+            if (e.data && e.data.source === "vizly") {
+              Streamlit.setComponentValue(e.data);
+            }
+          });
+        } catch (err) {}
+      });
+
+      Streamlit.setComponentReady();
+      // Also accept first render via query (declare_component path protocol)
+      Streamlit.setFrameHeight(420);
+    })();
+  </script>
+</body>
+</html>

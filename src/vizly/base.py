@@ -1,4 +1,4 @@
-"""BaseChart lifecycle: build, theme, update, and export."""
+"""BaseChart lifecycle: build, theme, update, live data, and export."""
 
 from __future__ import annotations
 
@@ -37,6 +37,7 @@ class BaseChart(ABC):
         height: Optional[str] = None,
         theme: Optional[ThemeLike] = None,
         option: Optional[Mapping[str, Any]] = None,
+        events: bool = True,
         **kwargs: Any,
     ) -> None:
         self.data = data
@@ -46,10 +47,14 @@ class BaseChart(ABC):
         self._theme_override = theme
         self._user_option: Dict[str, Any] = dict(option or {})
         self._updates: Dict[str, Any] = {}
+        if "events" in kwargs:
+            events = bool(kwargs.pop("events"))
+        self._events = bool(events)
         self.kwargs = kwargs
         self._cached_option: Optional[Dict[str, Any]] = None
         self._cached_theme: Optional[Dict[str, Any]] = None
         self._register_maps: Dict[str, Dict[str, Any]] = {}
+        self._option_patches: Dict[str, Any] = {}
 
     # --- subclass hook -------------------------------------------------
 
@@ -87,18 +92,25 @@ class BaseChart(ABC):
                 out["title"] = merged_title
             else:
                 out["title"] = {"text": self.title}
-        # High-level updates (sparse keys) applied before theme so theme still
-        # styles axes; raw merge_option remains last via _user_option.
         if self._updates:
             out = deep_merge(out, self._updates)
+        if self._option_patches:
+            out = deep_merge(out, self._option_patches)
         return out
+
+    def _option_for_html(self) -> Dict[str, Any]:
+        """Resolved option including HTML-only keys (polygon overlays, etc.)."""
+        structural = self._structural_with_title(self._build())
+        return self._apply_theme(structural)
 
     def to_option(self) -> Dict[str, Any]:
         """Return the fully resolved, JSON-serializable ECharts option dict."""
         if self._cached_option is not None:
             return deepcopy(self._cached_option)
-        structural = self._structural_with_title(self._build())
-        option = self._apply_theme(structural)
+        option = self._option_for_html()
+        # Internal HTML-only keys (SPA/JSON callers register maps themselves).
+        option.pop("_vizly_layer_maps", None)
+        option.pop("_vizly_geo_polygons", None)
         self._cached_option = option
         return deepcopy(option)
 
@@ -118,6 +130,8 @@ class BaseChart(ABC):
         width: Optional[str] = None,
         height: Optional[str] = None,
         include_assets: bool = True,
+        message_origin: Optional[str] = None,
+        chart_id: Optional[str] = None,
     ) -> str:
         """Return HTML for this chart.
 
@@ -125,9 +139,12 @@ class BaseChart(ABC):
         ``fragment=True``: div+scripts only (Flask/Django templates, HTMX).
         ``include_assets=False``: omit ECharts library tags (parent page already
         loaded them — preferred for HTMX swaps).
+        ``message_origin``: ``postMessage`` target (default same-origin;
+        pass ``"*"`` only for cross-origin bridges such as Streamlit).
         """
+        # Prefer structural option so HTML can apply polygon fill metadata.
         return render_html(
-            self.to_option(),
+            self._option_for_html(),
             theme=self.theme,
             width=width or self.width,
             height=height or self.height,
@@ -137,6 +154,10 @@ class BaseChart(ABC):
             register_maps=self._register_maps or None,
             fragment=fragment,
             include_assets=include_assets,
+            chart_type=self.chart_type,
+            events=self._events,
+            message_origin=message_origin,
+            chart_id=chart_id,
         )
 
     def to_fragment(self, *, include_assets: bool = True) -> str:
@@ -152,11 +173,36 @@ class BaseChart(ABC):
         out.write_text(html, encoding="utf-8")
         return str(out)
 
+    def live_update_script(self, chart_id: str, *, not_merge: bool = False) -> str:
+        """Return a ``<script>`` that pushes the current option to an existing embed.
+
+        Does not re-load ECharts. The host must already have rendered this chart
+        id (see ``window.__vizly``). Typical flow: ``set_data`` / ``set_option_patch``
+        then inject this script (HTMX swap target, etc.).
+        """
+        from vizly.events import live_option_update_js
+
+        return live_option_update_js(
+            chart_id, self.to_option(), not_merge=not_merge
+        )
+
     def _repr_html_(self) -> str:
         """Jupyter rich display."""
         return self.to_html()
 
     # --- mutation helpers ----------------------------------------------
+
+    def set_data(self, data: Any) -> "BaseChart":
+        """Replace chart data and invalidate the option cache (live refresh)."""
+        self.data = data
+        self._invalidate_cache()
+        return self
+
+    def set_option_patch(self, patch: Mapping[str, Any]) -> "BaseChart":
+        """Deep-merge a partial option for live update without full rebuild."""
+        self._option_patches = deep_merge(self._option_patches, dict(patch))
+        self._invalidate_cache()
+        return self
 
     def update(self, **kwargs: Any) -> "BaseChart":
         """Apply sparse high-level overrides (merged into structural option).
@@ -172,6 +218,8 @@ class BaseChart(ABC):
             self.height = kwargs.pop("height")
         if "theme" in kwargs:
             self._theme_override = kwargs.pop("theme")
+        if "events" in kwargs:
+            self._events = bool(kwargs.pop("events"))
         if kwargs:
             self._updates = deep_merge(self._updates, kwargs)
         self._invalidate_cache()
@@ -222,3 +270,9 @@ class OptionChart(BaseChart):
 
     def _build(self) -> Dict[str, Any]:
         return deepcopy(self._structural)
+
+    def set_data(self, data: Any) -> "BaseChart":
+        raise TypeError(
+            "OptionChart has no tabular data=. Use set_option_patch or "
+            "replace the option via merge_option / a new from_option()."
+        )

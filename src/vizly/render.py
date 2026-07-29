@@ -309,13 +309,19 @@ def render_html(
     register_maps: Optional[Mapping[str, Mapping[str, Any]]] = None,
     fragment: bool = False,
     include_assets: bool = True,
+    chart_type: str = "chart",
+    events: bool = True,
+    message_origin: Optional[str] = None,
 ) -> str:
     """Build HTML for a chart option.
 
     ``fragment=False`` (default): complete HTML document.
     ``fragment=True``: chart root ``<div>`` + scripts only (templates / HTMX).
     ``include_assets=False``: omit ECharts library tags (parent already loaded them).
+    ``message_origin``: ``postMessage`` targetOrigin (``None`` = same-origin).
     """
+    from vizly.events import chart_bootstrap_script
+
     cid = chart_id or f"vizly_{uuid.uuid4().hex[:12]}"
     safe_width = sanitize_css_size(width, field="width")
     safe_height = sanitize_css_size(height, field="height")
@@ -329,7 +335,9 @@ def render_html(
         if mode not in ("local", "cdn"):
             raise RenderError(f"Unknown assets.mode {mode!r}; use 'local' or 'cdn'.")
         scripts = ""
-    option_json = json.dumps(option, ensure_ascii=False, allow_nan=False)
+    # Work on a mutable copy so polygon/layer keys can be stripped for setOption.
+    option_data = dict(option)
+    option_json = json.dumps(option_data, ensure_ascii=False, allow_nan=False)
     page_title = title or (theme.get("name") and f"vizly — {theme['name']}") or "vizly"
 
     # Escape </script> inside JSON just in case.
@@ -346,19 +354,16 @@ def render_html(
                 f"echarts.registerMap({safe_name}, {geo_json});"
             )
     map_js = "\n      ".join(map_js_parts)
-    locale = echarts_locale(theme)
-    locale_json = json.dumps(locale)
-
-    init_script = f"""<script>
-    (function() {{
-      var el = document.getElementById("{cid}");
-      var chart = echarts.init(el, null, {{locale: {locale_json}}});
-      {map_js}
-      var option = {option_json};
-      chart.setOption(option);
-      window.addEventListener("resize", function() {{ chart.resize(); }});
-    }})();
-  </script>"""
+    locale_json = json.dumps(echarts_locale(theme))
+    init_script = chart_bootstrap_script(
+        cid,
+        option_json,
+        locale_json,
+        chart_type,
+        events=events,
+        message_origin=message_origin,
+        map_js=map_js,
+    )
 
     chart_div = (
         f'<div id="{cid}" class="vizly-chart" data-vizly-asset-mode="{mode}" '

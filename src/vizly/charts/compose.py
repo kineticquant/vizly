@@ -67,6 +67,19 @@ def _child_option_with_parent_theme(
     )
 
 
+def _child_option_for_html(
+    child: BaseChart, parent_theme_override: Any
+) -> Dict[str, Any]:
+    """Like ``_child_option_with_parent_theme`` but keeps HTML-only overlay keys."""
+    if parent_theme_override is None or child._theme_override is not None:
+        return child._option_for_html()
+    structural = child._structural_with_title(child._build())
+    theme = resolve_theme(parent_theme_override)
+    return apply_theme_to_option(
+        structural, theme, user_option=child._user_option or None
+    )
+
+
 def _has_cartesian_axes(opt: Dict[str, Any]) -> bool:
     return "xAxis" in opt and "yAxis" in opt
 
@@ -288,6 +301,9 @@ class PageChart(BaseChart):
     ECharts (+ GL/plugins) and map GeoJSON are embedded **once** for all
     children. Parent ``theme=`` styles children that have no theme of their
     own without mutating those child instances.
+
+    ``connect=True`` (default) links child charts for shared tooltip / brush
+    via ``echarts.connect``.
     """
 
     chart_type = "page"
@@ -301,8 +317,11 @@ class PageChart(BaseChart):
         height: Optional[str] = None,
         theme: Any = None,
         option: Any = None,
+        connect: bool = True,
         **kwargs: Any,
     ) -> None:
+        if "connect" in kwargs:
+            connect = bool(kwargs.pop("connect"))
         super().__init__(
             data=None,
             title=title,
@@ -312,6 +331,7 @@ class PageChart(BaseChart):
             option=option,
             **kwargs,
         )
+        self.connect = connect
         self.charts = _require_child_charts(charts, "page")
         need_gl, plugins, _maps = _aggregate_child_render_deps(
             self.charts, load_maps=False
@@ -327,7 +347,11 @@ class PageChart(BaseChart):
         # Compose descriptor for JSON/API consumers (not a single ECharts option).
         return {
             "title": {"text": self.title or "page"},
-            "_vizly_compose": {"type": "page", "options": child_opts},
+            "_vizly_compose": {
+                "type": "page",
+                "options": child_opts,
+                "connect": self.connect,
+            },
         }
 
     def to_html(
@@ -337,10 +361,12 @@ class PageChart(BaseChart):
         width: Optional[str] = None,
         height: Optional[str] = None,
         include_assets: bool = True,
+        message_origin: Optional[str] = None,
     ) -> str:
         import json
         import uuid
 
+        from vizly.events import chart_bootstrap_script, connect_charts_js
         from vizly.render import (
             _escape_html,
             assert_html_trust_safe,
@@ -370,10 +396,12 @@ class PageChart(BaseChart):
             map_js += f"echarts.registerMap({json.dumps(map_name)}, {geo});"
 
         bodies: List[str] = []
+        chart_ids: List[str] = []
         for child in self.charts:
             cid = f"vizly_{uuid.uuid4().hex[:10]}"
+            chart_ids.append(cid)
             opt = json.dumps(
-                _child_option_with_parent_theme(child, self._theme_override),
+                _child_option_for_html(child, self._theme_override),
                 ensure_ascii=False,
                 allow_nan=False,
             ).replace("</", "<\\/")
@@ -383,16 +411,24 @@ class PageChart(BaseChart):
             w = sanitize_css_size(
                 width or child.width or "100%", field="width"
             )
+            events_on = getattr(child, "_events", True)
+            init = chart_bootstrap_script(
+                cid,
+                opt,
+                locale_json,
+                child.chart_type,
+                events=events_on,
+                message_origin=message_origin,
+            )
             bodies.append(
                 f"<h2>{_escape_html(child.title or child.chart_type)}</h2>"
                 f"<div id='{cid}' class='vizly-chart' style='width:{w};height:{h}' "
                 f"data-vizly-asset-mode='{mode}'></div>"
-                f"<script>(function(){{var el=document.getElementById('{cid}');"
-                f"var chart=echarts.init(el,null,{{locale:{locale_json}}});"
-                f"chart.setOption({opt});"
-                f"window.addEventListener('resize',function(){{chart.resize();}});}})();"
-                f"</script>"
+                f"{init}"
             )
+
+        if self.connect:
+            bodies.append(f"<script>{connect_charts_js(chart_ids)}</script>")
 
         # Shared map registration before first init when maps are present.
         if map_js:
@@ -472,10 +508,12 @@ class TabChart(BaseChart):
         width: Optional[str] = None,
         height: Optional[str] = None,
         include_assets: bool = True,
+        message_origin: Optional[str] = None,
     ) -> str:
         import json
         import uuid
 
+        from vizly.events import chart_bootstrap_js
         from vizly.render import (
             _escape_html,
             assert_html_trust_safe,
@@ -529,15 +567,22 @@ class TabChart(BaseChart):
                 f"class='vizly-chart' data-vizly-asset-mode='{mode}'></div>"
             )
             opt = json.dumps(
-                _child_option_with_parent_theme(child, self._theme_override),
+                _child_option_for_html(child, self._theme_override),
                 ensure_ascii=False,
                 allow_nan=False,
             ).replace("</", "<\\/")
+            events_on = getattr(child, "_events", True)
             inits.append(
-                f"var el{i}=document.getElementById('{panel_id}');"
-                f"var c{i}=echarts.init(el{i},null,{{locale:{locale_json}}});"
-                f"c{i}.setOption({opt});"
-                f"charts.push(c{i});"
+                chart_bootstrap_js(
+                    panel_id,
+                    opt,
+                    locale_json,
+                    child.chart_type,
+                    events=events_on,
+                    message_origin=message_origin,
+                    bind_resize=False,
+                    after_init="charts.push(chart);",
+                )
             )
 
         n = len(self.charts)
@@ -649,6 +694,7 @@ class TimelineChart(BaseChart):
         width: Optional[str] = None,
         height: Optional[str] = None,
         include_assets: bool = True,
+        message_origin: Optional[str] = None,
     ) -> str:
         _need_gl, _plugins, maps = _aggregate_child_render_deps(self.charts)
         self._register_maps = maps
@@ -657,4 +703,5 @@ class TimelineChart(BaseChart):
             width=width,
             height=height,
             include_assets=include_assets,
+            message_origin=message_origin,
         )

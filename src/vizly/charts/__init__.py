@@ -40,6 +40,7 @@ from vizly.charts.gl3d import (
 )
 from vizly.charts.hierarchical import (
     DonutChart,
+    FlowchartChart,
     FunnelChart,
     GaugeChart,
     GraphChart,
@@ -80,6 +81,7 @@ CHART_TYPES: Dict[str, Type[BaseChart]] = {
     "sunburst": SunburstChart,
     "tree": TreeChart,
     "graph": GraphChart,
+    "flowchart": FlowchartChart,
     "wordcloud": WordCloudChart,
     "geo": GeoChart,
     "bar3d": Bar3DChart,
@@ -125,6 +127,7 @@ BAND_B_TYPES = (
     "sunburst",
     "tree",
     "graph",
+    "flowchart",
     "wordcloud",
     "geo",
     "bar3d",
@@ -175,6 +178,8 @@ def list_unavailable_chart_types() -> List[Dict[str, str]]:
 
 def get_chart_class(chart_type: str) -> Type[BaseChart]:
     key = chart_type.strip().lower()
+    if key == "diagram":
+        key = "flowchart"
     if key == "chord":
         reason = UPSTREAM_UNAVAILABLE[0][1]
         raise KeyError(f"Chart type 'chord' is upstream-unavailable: {reason}")

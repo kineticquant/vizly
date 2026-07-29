@@ -9,8 +9,10 @@ from vizly.api import (
     candlestick,
     chart,
     combo,
+    diagram,
     donut,
     effect_scatter,
+    flowchart,
     from_option,
     funnel,
     gauge,
@@ -47,7 +49,25 @@ from vizly.api import (
 from vizly.base import BaseChart, OptionChart
 from vizly.charts import list_chart_types, list_unavailable_chart_types
 from vizly.config import get_theme, resolve_theme, set_theme
-from vizly.data import DataError, infer_roles, standardize
+from vizly.data import (
+    DataError,
+    TabularView,
+    as_tabular,
+    filter_tabular,
+    infer_roles,
+    standardize,
+)
+from vizly.events import build_click_payload, filter_by_click
+from vizly.geo_layers import GeoLayer, overlay_geojson
+from vizly.loaders import (
+    from_columnar,
+    from_csv,
+    from_excel,
+    from_json,
+    from_records,
+    from_sql,
+    from_tsv,
+)
 from vizly.maps import list_bundled_maps, list_opt_in_maps, register_map_pack
 from vizly.metrics import from_cloudwatch, from_elasticsearch, from_elk, from_prometheus
 from vizly.render import load_map_geojson, map_path
@@ -61,23 +81,38 @@ from vizly.theme.registry import (
 __all__ = [
     "BaseChart",
     "DataError",
+    "GeoLayer",
     "OptionChart",
+    "TabularView",
     "__version__",
     "area",
+    "as_tabular",
     "bar",
     "bar3d",
     "boxplot",
+    "build_click_payload",
     "candlestick",
     "chart",
     "combo",
+    "diagram",
     "donut",
     "effect_scatter",
     "export_theme",
+    "filter_by_click",
+    "filter_tabular",
+    "flowchart",
     "from_cloudwatch",
+    "from_columnar",
+    "from_csv",
     "from_elasticsearch",
     "from_elk",
+    "from_excel",
+    "from_json",
     "from_option",
     "from_prometheus",
+    "from_records",
+    "from_sql",
+    "from_tsv",
     "funnel",
     "gauge",
     "geo",
@@ -101,6 +136,7 @@ __all__ = [
     "map_chart",
     "map_path",
     "mix",
+    "overlay_geojson",
     "page",
     "parallel",
     "pictorial_bar",

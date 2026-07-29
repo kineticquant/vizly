@@ -41,6 +41,7 @@ from vizly.charts.gl3d import (
 )
 from vizly.charts.hierarchical import (
     DonutChart,
+    FlowchartChart,
     FunnelChart,
     GaugeChart,
     GraphChart,
@@ -193,6 +194,13 @@ def graph(data: Any = None, **kwargs: Any) -> GraphChart:
     return GraphChart(data, **kwargs)
 
 
+def flowchart(data: Any = None, **kwargs: Any) -> FlowchartChart:
+    return FlowchartChart(data, **kwargs)
+
+
+diagram = flowchart
+
+
 def wordcloud(data: Any = None, **kwargs: Any) -> WordCloudChart:
     return WordCloudChart(data, **kwargs)
 
@@ -252,6 +260,8 @@ __all__ = [
     "donut",
     "effect_scatter",
     "from_option",
+    "diagram",
+    "flowchart",
     "funnel",
     "gauge",
     "geo",

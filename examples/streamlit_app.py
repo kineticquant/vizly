@@ -20,10 +20,12 @@ df = pd.DataFrame(
     }
 )
 chart = vz.line(df, x="date", y=["revenue", "cost"], title="Revenue vs cost")
-st.subheader("Single chart")
-st_vizly(chart, height=420)
+st.subheader("Single chart (click returns event payload)")
+click = st_vizly(chart, height=420, key="main")
+if click:
+    st.json(click)
 
 bar = vz.bar(df, x="date", y="revenue", title="Revenue")
 line = vz.line(df, x="date", y="cost", title="Cost")
-st.subheader("Dashboard (ECharts loaded once)")
+st.subheader("Dashboard (ECharts loaded once, linked tooltip)")
 st_dashboard([bar, line], height=900, title="Ops")

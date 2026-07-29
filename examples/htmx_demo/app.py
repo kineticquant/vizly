@@ -16,7 +16,11 @@ from flask import Flask, request
 
 import vizly as vz
 from vizly.integrations._embed import assets_html
-from vizly.integrations.htmx import htmx_chart_fragment, htmx_or_full
+from vizly.integrations.htmx import (
+    htmx_chart_fragment,
+    htmx_event_listener_js,
+    htmx_or_full,
+)
 
 app = Flask(__name__)
 vz.set_theme("corporate")
@@ -29,6 +33,7 @@ PAGE = """
   <title>vizly HTMX</title>
   <script src="https://cdn.jsdelivr.net/npm/htmx.org@1.9.12/dist/htmx.min.js"></script>
   %s
+  %s
 </head>
 <body>
   <h1>vizly + HTMX</h1>
@@ -37,6 +42,7 @@ PAGE = """
     <button hx-get="/chart?metric=cost" hx-target="#chart" hx-swap="innerHTML">Cost</button>
   </p>
   <div id="chart">%s</div>
+  <div id="vizly-detail"><em>Click a chart point to POST a vizly:event here.</em></div>
 </body>
 </html>
 """
@@ -58,8 +64,9 @@ def _chart(metric: str = "revenue"):
 def index():
     # Assets once in <head>; initial fragment without re-embedding ECharts.
     head = assets_html()
+    listener = htmx_event_listener_js("/detail", target="#vizly-detail")
     frag = htmx_chart_fragment(_chart("revenue"), height="360px", include_assets=False)
-    return PAGE % (head, frag)
+    return PAGE % (head, listener, frag)
 
 
 @app.get("/chart")
@@ -68,6 +75,12 @@ def chart():
     headers = {k: v for k, v in request.headers.items()}
     # HTMX → fragment without assets; direct navigation → full document.
     return htmx_or_full(_chart(metric), headers, height="360px")
+
+
+@app.post("/detail")
+def detail():
+    payload = request.form.get("vizly_event", "{}")
+    return f"<pre>{payload}</pre>"
 
 
 if __name__ == "__main__":

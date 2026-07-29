@@ -7,7 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-07-29
+
+Formal **v1** distribution. Same product surface as the 1.0.0 notes.
+
+### Changed
+
+- Version **1.0.1** (distribution fixes)
+- Official notes: [releases/v1.0.1/RELEASE.md](releases/v1.0.1/RELEASE.md)
+
 ## [1.0.0] - 2026-07-28
+
+Formal **v1** product surface (documented here). Prefer **1.0.1** for installs from PyPI.
 
 Formal **v1** release of vizly: high-performance, low-boilerplate, fully themable charting over Apache ECharts with native embeds, multi-source data ingest, drill/events, flowchart, expanded themes, mapping dashboards, geo-layer overlays, live update, linked brush, and browser-side image export.
 
@@ -132,7 +143,7 @@ vizly does **not** bundle every DB driver or every external dialect package. If 
 
 ### Changed
 
-- Version **1.0.0**
+- Version **1.0.0** (product surface; distribution continues as **1.0.1**)
 - Base dependencies: `pandas`, `numpy`, `sqlalchemy`, `openpyxl`
 - Data layer centers on TabularView; `standardize()` remains as DataFrame escape hatch
 - Default chart chrome: title left, legend top-right, cartesian plot `grid` padding (`containLabel`). Override via theme `title`/`legend` keys or `merge_option` (not locked).

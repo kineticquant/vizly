@@ -50,8 +50,8 @@ On a `v*` tag, Release also creates a **GitHub Release** (changelog body + `dist
 7. Tag and push:
 
 ```bash
-git tag v1.0.0
-git push origin v1.0.0
+git tag v1.0.1
+git push origin v1.0.1
 ```
 
 That triggers **Release**: verify (lint + tests) → build → (optional) TestPyPI → PyPI → GitHub Release.

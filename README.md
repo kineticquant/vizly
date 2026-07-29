@@ -45,9 +45,11 @@ Also reachable when you install an **external** SQLAlchemy dialect (examples; no
 [![Databricks](https://img.shields.io/badge/Databricks-FF3621?logo=databricks&logoColor=white)](#data-in)
 [![MongoDB](https://img.shields.io/badge/MongoDB-47A248?logo=mongodb&logoColor=white)](#data-in)
 
-vizly does **not** vendor DB drivers or run CI against every database. If SQLAlchemy can connect and return rows, `from_sql` can chart them. Full dialect tables: [CHANGELOG](CHANGELOG.md) / [v1.0.0 release notes](releases/v1.0.0/RELEASE.md).
+vizly does **not** vendor DB drivers or run CI against every database. If SQLAlchemy can connect and return rows, `from_sql` can chart them. Full dialect tables: [CHANGELOG](CHANGELOG.md) / [v1.0.1 release notes](releases/v1.0.1/RELEASE.md).
 
 **Formal v1.** High-performance, low-boilerplate, fully themable Python charting over Apache ECharts.
+
+Detailed documentation is publicly available at [Rancero](https://docs.rancero.com/docs/category/vizly/).
 
 Ship production charts in a few lines of Python: DataFrame, records, columnar dict, file, or SQL in; HTML, JSON, or browser PNG out. No nested option builders. Built for speed (local assets, one ECharts load per page) and for native embeds in the stacks you already use.
 
@@ -367,6 +369,8 @@ python scripts/build_docs_showcase.py
 ```
 
 Full testing runbook: **[TESTING.md](TESTING.md)**. Also [CHANGELOG.md](CHANGELOG.md) and [RELEASE.md](RELEASE.md).
+
+Detailed documentation: [Rancero vizly docs](https://docs.rancero.com/docs/category/vizly/).
 
 ## Known limitations
 

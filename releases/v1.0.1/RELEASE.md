@@ -1,13 +1,11 @@
-> **Note:** Formal v1 distribution continues as **[1.0.1](../v1.0.1/RELEASE.md)**. This folder keeps the original Formal v1 write-up.
-
-# vizly v1.0.0 release notes
+# vizly v1.0.1 release notes
 
 **Release date:** 2026-07-29  
 **Python:** 3.9 or later (CI: 3.9–3.13)  
 **Runtime deps:** `pandas`, `numpy`, `sqlalchemy`, `openpyxl` (no pyecharts)  
 **Maintainer:** Kineticquant
 
-These are the **official Formal v1** release notes for vizly. They describe the full product as shipped in **1.0.0**: every supported capability, not only the delta from a prior preview tag. Chronological diffs live in [CHANGELOG.md](../../CHANGELOG.md) and under `releases/v0.2.x/`.
+These are the **official Formal v1** release notes for vizly. They describe the full product as shipped in **1.0.1**: every supported capability, not only the delta from a prior preview tag. Chronological diffs live in [CHANGELOG.md](../../CHANGELOG.md) and under `releases/v0.2.x/`.
 
 Detailed documentation is publicly available at [Rancero](https://docs.rancero.com/docs/category/vizly/).
 
@@ -19,7 +17,7 @@ Detailed documentation is publicly available at [Rancero](https://docs.rancero.c
 
 Ship production charts in a few lines of Python: DataFrame, records, columnar dict, file, or SQL in; HTML, JSON, or browser image out. No nested option builders. Built for speed (local assets, one ECharts load per page) and for native embeds in the stacks you already use.
 
-| Pillar | What 1.0.0 delivers |
+| Pillar | What 1.0.1 delivers |
 |--------|---------------------|
 | Easy to use | Set a theme, call `vz.line` / `vz.bar` / …, export with `to_html()`, `to_option()`, or browser `toDataURL` / `downloadImage` |
 | Data without forced DataFrames | Pass `list[dict]`, `dict[list]`, loader output, or pandas (pandas is a dependency, not a required call-site API) |
@@ -385,7 +383,7 @@ For headless batch PNG/PDF, run Playwright (or similar) on `chart.to_html()` you
 | Trust scanner | Checks `<script src>` hosts only (not option JSON labels) |
 | Locale | English-first APIs, docs, and errors (`en-US` chrome) |
 
-### Pinned vendored assets (1.0.0)
+### Pinned vendored assets (1.0.1)
 
 | File | Version |
 |------|---------|
@@ -502,9 +500,9 @@ Full runbook: [TESTING.md](../../TESTING.md). Publish process: [RELEASE.md](../.
 
 ---
 
-## Upgrade notes (any 0.x → 1.0.0)
+## Upgrade notes (any 0.x → 1.0.1)
 
-1. Install or upgrade to `vizly==1.0.0` (pulls `sqlalchemy` and `openpyxl` as direct deps).
+1. Install or upgrade to `vizly==1.0.1` (pulls `sqlalchemy` and `openpyxl` as direct deps).
 2. Prefer loaders / tabular inputs where you previously always built DataFrames by hand.
 3. For maps with overlays, use `layers=` / `overlay_geojson`. Do not treat geo layers as `register_map_pack` substitutes for choropleth packs.
 4. For images, use client `toDataURL` / `downloadImage` (or external headless on `to_html()`). Do not expect `vizly[export]`.
@@ -518,7 +516,7 @@ Preview packaging notes from **0.2.1** (verify gate, GitHub Release on tags, pan
 
 ## Prior preview releases
 
-Formal **1.0.0** supersedes the 0.x preview line as the supported product surface. Earlier notes remain for history:
+Formal **1.0.1** supersedes the 0.x preview line as the supported product surface. Earlier notes remain for history:
 
 | Tag | Notes |
 |-----|-------|

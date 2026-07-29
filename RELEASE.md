@@ -43,12 +43,14 @@ On a `v*` tag, Release also creates a **GitHub Release** (changelog body + `dist
 
 1. Bump `version` in `pyproject.toml` and `src/vizly/_version.py` (keep in sync).
 2. Update [CHANGELOG.md](CHANGELOG.md) (pin ECharts asset versions in the notes).
-3. Merge to `main`.
-4. Tag and push:
+3. **Re-verify SQLAlchemy dialect tables** in CHANGELOG/README against current [SQLAlchemy Dialects](https://docs.sqlalchemy.org/en/20/dialects/) (included + external). Update any missing or removed dialects before tagging.
+4. Confirm Formal v1 docs still list every data→chart path (DataFrame, records, columnar, CSV/TSV/JSON/Excel, metrics helpers, SQL).
+5. Merge to `main`.
+6. Tag and push:
 
 ```bash
-git tag v0.2.1
-git push origin v0.2.1
+git tag v1.0.0
+git push origin v1.0.0
 ```
 
 That triggers **Release**: verify (lint + tests) → build → (optional) TestPyPI → PyPI → GitHub Release.
@@ -82,6 +84,18 @@ pip install -e ".[dev,browser]"
 python -m playwright install chromium
 python -m pytest -m browser -v                              # headless hero set
 python scripts/validate_samples_browser.py --gallery        # visible full matrix
+```
+
+### Export smoke (optional — browser client)
+
+Image export is client-side (`window.__vizly[id].toDataURL`). No package extra.
+
+For headless batch outside vizly:
+
+```bash
+pip install -e ".[browser]"
+python -m playwright install chromium
+# run Playwright against chart.to_html() in your own script
 ```
 
 ## CI vs Release

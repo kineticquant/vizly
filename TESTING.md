@@ -66,10 +66,12 @@ python scripts/validate_samples_browser.py --gallery
 
 | Extra | Install | Purpose |
 |-------|---------|---------|
-| (core) | `pip install -e .` | Runtime: pandas + numpy |
+| (core) | `pip install -e .` | Runtime: pandas, numpy, sqlalchemy, openpyxl |
 | `dev` | `pip install -e ".[dev]"` | pytest, coverage, ruff, build, twine (mypy optional; not a CI gate) |
 | `examples` | `pip install -e ".[examples]"` | Streamlit / FastAPI / Flask / Django for integration tests |
 | `browser` | `pip install -e ".[browser]"` | Playwright for Level 3 + local review script |
+
+PNG/JPEG export uses the browser embed (`toDataURL` / `downloadImage`), not a package extra.
 
 After installing `browser`:
 

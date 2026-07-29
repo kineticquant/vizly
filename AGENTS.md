@@ -65,10 +65,14 @@ Provenance: `src/vizly/assets/README.md`. Trust behavior: `src/vizly/render.py`,
 src/vizly/
   api.py              # Public chart factories (vz.line, vz.bar, …)
   base.py             # BaseChart lifecycle: build → theme → update → export
-  data.py             # Data standardization / role inference
+  data.py             # TabularView spine / role inference
+  loaders.py          # CSV/TSV/JSON/Excel/SQL/records → TabularView
+  events.py           # Click/drill payloads + live-update + client image helpers
+  export.py           # Client export docs/helpers (getDataURL; no Chromium)
   config.py           # Session theme get/set/resolve
   render.py           # HTML embed + trusted local/CDN assets + maps
-  maps.py             # Map pack registration
+  maps.py             # Basemap pack registration (choropleth)
+  geo_layers.py       # GeoJSON overlays (segregated from map packs)
   metrics.py          # Prometheus / CloudWatch / Elasticsearch payload normalizers
   charts/             # Chart builders by family (cartesian, geo, gl3d, …)
   theme/              # Presets, registry, merge, apply, schema (CDN allowlist)
@@ -90,7 +94,7 @@ scripts/              # Golden update + browser gallery validation
 
 **Do not** fork embed logic per framework. Extend the shared contract, then thin wrappers.
 
-**Deferred:** PNG/PDF export (`vizly[export]`) is not shipped. Do not pretend it exists.
+**Export:** Browser `toDataURL` / `downloadImage` via `window.__vizly`. No in-package Chromium. SQL/file loaders and geo layers are **base** library — do not add `vizly[sql]` or similar.
 
 ---
 

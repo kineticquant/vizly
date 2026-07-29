@@ -1,6 +1,6 @@
-# vizly v1.0.0 Formal release notes
+# vizly v1.0.0 release notes
 
-**Release date:** 2026-07-28  
+**Release date:** 2026-07-29  
 **Python:** 3.9 or later (CI: 3.9–3.13)  
 **Runtime deps:** `pandas`, `numpy`, `sqlalchemy`, `openpyxl` (no pyecharts)  
 **Maintainer:** Kineticquant

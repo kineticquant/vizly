@@ -43,10 +43,11 @@ On a `v*` tag, Release also creates a **GitHub Release** (changelog body + `dist
 
 1. Bump `version` in `pyproject.toml` and `src/vizly/_version.py` (keep in sync).
 2. Update [CHANGELOG.md](CHANGELOG.md) (pin ECharts asset versions in the notes).
-3. **Re-verify SQLAlchemy dialect tables** in CHANGELOG/README against current [SQLAlchemy Dialects](https://docs.sqlalchemy.org/en/20/dialects/) (included + external). Update any missing or removed dialects before tagging.
-4. Confirm Formal v1 docs still list every data→chart path (DataFrame, records, columnar, CSV/TSV/JSON/Excel, metrics helpers, SQL).
-5. Merge to `main`.
-6. Tag and push:
+3. Add versioned notes under `releases/vX.Y.Z/RELEASE.md` (same shape as prior folders under `releases/`).
+4. **Re-verify SQLAlchemy dialect tables** in CHANGELOG/README against current [SQLAlchemy Dialects](https://docs.sqlalchemy.org/en/20/dialects/) (included + external). Update any missing or removed dialects before tagging.
+5. Confirm Formal v1 docs still list every data→chart path (DataFrame, records, columnar, CSV/TSV/JSON/Excel, metrics helpers, SQL).
+6. Merge to `main`.
+7. Tag and push:
 
 ```bash
 git tag v1.0.0

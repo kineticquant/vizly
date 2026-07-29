@@ -7,11 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Changed
-
-- Default chart chrome: title left, legend top-right, cartesian plot `grid` padding (`containLabel`). Override via theme `title`/`legend` keys or `merge_option` (not locked).
-- Docs showcase rebuilt for v1 features (ingest, geo overlays, mapping page, events/export, chrome overrides): `python scripts/build_docs_showcase.py`
-
 ## [1.0.0] - 2026-07-28
 
 Formal **v1** release of vizly: high-performance, low-boilerplate, fully themable charting over Apache ECharts with native embeds, multi-source data ingest, drill/events, flowchart, expanded themes, mapping dashboards, geo-layer overlays, live update, linked brush, and browser-side image export.
@@ -133,12 +128,14 @@ vizly does **not** bundle every DB driver or every external dialect package. If 
 #### Examples
 
 - `examples/mapping_dashboard.py`, `examples/ingest_demo.py`
+- Docs showcase builder for v1 features: `python scripts/build_docs_showcase.py`
 
 ### Changed
 
 - Version **1.0.0**
 - Base dependencies: `pandas`, `numpy`, `sqlalchemy`, `openpyxl`
 - Data layer centers on TabularView; `standardize()` remains as DataFrame escape hatch
+- Default chart chrome: title left, legend top-right, cartesian plot `grid` padding (`containLabel`). Override via theme `title`/`legend` keys or `merge_option` (not locked).
 - Map series options include `nameProperty` when join fields are set
 - Page compose descriptor includes `connect`
 

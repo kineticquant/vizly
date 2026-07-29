@@ -32,8 +32,18 @@ _BASE: Dict[str, Any] = {
         "border": "#E5E7EB",
         "text": "#111827",
     },
-    "legend": {"show": True, "top": "2%", "text_color": "#374151"},
-    "title": {"color": "#111827", "font_weight": 600},
+    "legend": {
+        "show": True,
+        "top": 10,
+        "right": 12,
+        "text_color": "#374151",
+    },
+    "title": {
+        "color": "#111827",
+        "font_weight": 600,
+        "left": "left",
+        "top": 10,
+    },
     "animation": {"enabled": True, "duration": 400},
     "series_defaults": {
         "line": {
@@ -113,7 +123,7 @@ DARK: Dict[str, Any] = _preset(
         "border": "#334155",
         "text": "#E2E8F0",
     },
-    legend={"show": True, "top": "2%", "text_color": "#CBD5E1"},
+    legend={"show": True, "text_color": "#CBD5E1"},
     title={"color": "#F1F5F9", "font_weight": 600},
 )
 
@@ -152,7 +162,7 @@ MINIMAL: Dict[str, Any] = _preset(
         "#E2A03F",
     ],
     grid={"show": False, "color": "#EEEEEE", "type": "solid"},
-    legend={"show": False, "top": "2%", "text_color": "#444444"},
+    legend={"show": False, "text_color": "#444444"},
     animation={"enabled": False, "duration": 0},
     series_defaults={
         "line": {
@@ -194,7 +204,7 @@ CONTRAST: Dict[str, Any] = _preset(
         "border": "#000000",
         "text": "#000000",
     },
-    legend={"show": True, "top": "2%", "text_color": "#000000"},
+    legend={"show": True, "text_color": "#000000"},
     title={"color": "#000000", "font_weight": 700},
 )
 
@@ -245,7 +255,7 @@ OPS_GRAFANA: Dict[str, Any] = _preset(
         "border": "#3D3D3D",
         "text": "#D8D9DA",
     },
-    legend={"show": True, "top": "2%", "text_color": "#CCCCDC"},
+    legend={"show": True, "text_color": "#CCCCDC"},
     title={"color": "#D8D9DA", "font_weight": 500},
     animation={"enabled": False, "duration": 0},
     series_defaults=_OPS_SERIES,
@@ -280,7 +290,7 @@ OPS_CLOUDWATCH: Dict[str, Any] = _preset(
         "border": "#545B64",
         "text": "#FFFFFF",
     },
-    legend={"show": True, "top": "2%", "text_color": "#D5DBDB"},
+    legend={"show": True, "text_color": "#D5DBDB"},
     title={"color": "#FFFFFF", "font_weight": 600},
     animation={"enabled": False, "duration": 0},
     series_defaults=_OPS_SERIES,
@@ -315,10 +325,146 @@ OPS_KIBANA: Dict[str, Any] = _preset(
         "border": "#343741",
         "text": "#DFE5EF",
     },
-    legend={"show": True, "top": "2%", "text_color": "#DFE5EF"},
+    legend={"show": True, "text_color": "#DFE5EF"},
     title={"color": "#DFE5EF", "font_weight": 600},
     animation={"enabled": True, "duration": 200},
     series_defaults=_OPS_SERIES,
+)
+
+# --- Editor-inspired presets ---------------------------------------------
+# Visual inspiration only. Not affiliated with Monokai, Tokyo Night,
+# Dracula, Nord, Solarized, or One Dark authors/projects.
+
+_EDITOR_FONT = '"JetBrains Mono", "IBM Plex Mono", "Consolas", monospace'
+_EDITOR_SERIES: Dict[str, Any] = {
+    "line": {
+        "smooth": False,
+        "show_symbol": True,
+        "symbol_size": 5,
+        "label_show": False,
+    },
+    "bar": {"label_show": False, "bar_max_width": 36},
+    "pie": {"label_show": True, "rose_type": None},
+}
+
+
+def _editor_dark(
+    name: str,
+    *,
+    background: str,
+    text: str,
+    muted: str,
+    palette: list,
+    grid: str,
+    axis: str,
+) -> Dict[str, Any]:
+    return _preset(
+        name,
+        background=background,
+        text_color=text,
+        muted_text=muted,
+        font_family=_EDITOR_FONT,
+        colorblind_safe=True,
+        palette=palette,
+        grid={"show": True, "color": grid, "type": "solid"},
+        axis={
+            "line_color": axis,
+            "label_color": muted,
+            "name_color": text,
+        },
+        tooltip={
+            "bg": background,
+            "border": axis,
+            "text": text,
+        },
+        legend={"show": True, "text_color": text},
+        title={"color": text, "font_weight": 600},
+        series_defaults=_EDITOR_SERIES,
+    )
+
+
+EDITOR_MONOKAI: Dict[str, Any] = _editor_dark(
+    "editor_monokai",
+    background="#272822",
+    text="#F8F8F2",
+    muted="#75715E",
+    palette=["#A6E22E", "#F92672", "#66D9EF", "#E6DB74", "#FD971F", "#AE81FF", "#F8F8F2", "#75715E"],
+    grid="#3E3D32",
+    axis="#75715E",
+)
+
+EDITOR_TOKYO_NIGHT: Dict[str, Any] = _editor_dark(
+    "editor_tokyo_night",
+    background="#1A1B26",
+    text="#C0CAF5",
+    muted="#565F89",
+    palette=["#7AA2F7", "#BB9AF7", "#9ECE6A", "#E0AF68", "#F7768E", "#7DCFFF", "#FF9E64", "#C0CAF5"],
+    grid="#24283B",
+    axis="#565F89",
+)
+
+EDITOR_DRACULA: Dict[str, Any] = _editor_dark(
+    "editor_dracula",
+    background="#282A36",
+    text="#F8F8F2",
+    muted="#6272A4",
+    palette=["#BD93F9", "#FF79C6", "#50FA7B", "#FFB86C", "#8BE9FD", "#F1FA8C", "#FF5555", "#F8F8F2"],
+    grid="#44475A",
+    axis="#6272A4",
+)
+
+EDITOR_NORD: Dict[str, Any] = _editor_dark(
+    "editor_nord",
+    background="#2E3440",
+    text="#ECEFF4",
+    muted="#4C566A",
+    palette=["#88C0D0", "#81A1C1", "#A3BE8C", "#EBCB8B", "#BF616A", "#B48EAD", "#D08770", "#8FBCBB"],
+    grid="#3B4252",
+    axis="#4C566A",
+)
+
+EDITOR_ONE_DARK: Dict[str, Any] = _editor_dark(
+    "editor_one_dark",
+    background="#282C34",
+    text="#ABB2BF",
+    muted="#5C6370",
+    palette=["#61AFEF", "#C678DD", "#98C379", "#E5C07B", "#E06C75", "#56B6C2", "#D19A66", "#ABB2BF"],
+    grid="#3E4451",
+    axis="#5C6370",
+)
+
+EDITOR_SOLARIZED_DARK: Dict[str, Any] = _editor_dark(
+    "editor_solarized_dark",
+    background="#002B36",
+    text="#839496",
+    muted="#586E75",
+    palette=["#268BD2", "#2AA198", "#859900", "#B58900", "#CB4B16", "#D33682", "#6C71C4", "#93A1A1"],
+    grid="#073642",
+    axis="#586E75",
+)
+
+EDITOR_SOLARIZED_LIGHT: Dict[str, Any] = _preset(
+    "editor_solarized_light",
+    background="#FDF6E3",
+    text_color="#657B83",
+    muted_text="#93A1A1",
+    font_family=_EDITOR_FONT,
+    colorblind_safe=True,
+    palette=["#268BD2", "#2AA198", "#859900", "#B58900", "#CB4B16", "#D33682", "#6C71C4", "#073642"],
+    grid={"show": True, "color": "#EEE8D5", "type": "solid"},
+    axis={
+        "line_color": "#93A1A1",
+        "label_color": "#657B83",
+        "name_color": "#586E75",
+    },
+    tooltip={
+        "bg": "#EEE8D5",
+        "border": "#93A1A1",
+        "text": "#657B83",
+    },
+    legend={"show": True, "text_color": "#586E75"},
+    title={"color": "#586E75", "font_weight": 600},
+    series_defaults=_EDITOR_SERIES,
 )
 
 PRESETS: Dict[str, Dict[str, Any]] = {
@@ -331,6 +477,13 @@ PRESETS: Dict[str, Dict[str, Any]] = {
     "ops_grafana": OPS_GRAFANA,
     "ops_cloudwatch": OPS_CLOUDWATCH,
     "ops_kibana": OPS_KIBANA,
+    "editor_monokai": EDITOR_MONOKAI,
+    "editor_tokyo_night": EDITOR_TOKYO_NIGHT,
+    "editor_dracula": EDITOR_DRACULA,
+    "editor_nord": EDITOR_NORD,
+    "editor_solarized_light": EDITOR_SOLARIZED_LIGHT,
+    "editor_solarized_dark": EDITOR_SOLARIZED_DARK,
+    "editor_one_dark": EDITOR_ONE_DARK,
 }
 
 

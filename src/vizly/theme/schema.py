@@ -42,13 +42,19 @@ class TooltipTheme(TypedDict, total=False):
 
 class LegendTheme(TypedDict, total=False):
     show: bool
-    top: str
+    top: Union[str, int]
+    left: Union[str, int]
+    right: Union[str, int]
+    orient: str
     text_color: str
 
 
 class TitleTheme(TypedDict, total=False):
     color: str
     font_weight: Union[int, str]
+    left: Union[str, int]
+    right: Union[str, int]
+    top: Union[str, int]
 
 
 class AnimationTheme(TypedDict, total=False):

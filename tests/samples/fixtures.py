@@ -263,6 +263,13 @@ def samples_for(chart_type: str) -> Dict[str, Any]:
         ),
         "tree": dict(data=tree_df, names="name", parent="parent", title="Product tree"),
         "graph": dict(data=sankey_df, title="Acquisition graph"),
+        "flowchart": dict(
+            data=sankey_df,
+            source="source",
+            target="target",
+            layout="hierarchical",
+            title="Process flow",
+        ),
         "wordcloud": dict(data=word_df, title="Topic cloud"),
         "geo": dict(
             data=geo_df,

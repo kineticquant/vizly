@@ -81,3 +81,11 @@ def test_runtime_requires_pandas_and_numpy():
     names = _pyproject_dependency_names()
     assert "pandas" in names
     assert "numpy" in names
+    assert "sqlalchemy" in names
+    assert "openpyxl" in names
+
+
+def test_export_extra_removed():
+    text = _PYPROJECT.read_text(encoding="utf-8")
+    assert "export = [" not in text
+    assert 'browser = ["playwright' in text or "browser = ['playwright" in text

@@ -33,6 +33,13 @@ def test_builtin_presets_present_and_valid():
         "ops_grafana",
         "ops_cloudwatch",
         "ops_kibana",
+        "editor_monokai",
+        "editor_tokyo_night",
+        "editor_dracula",
+        "editor_nord",
+        "editor_solarized_light",
+        "editor_solarized_dark",
+        "editor_one_dark",
     }
     assert set(PRESETS) == expected
     for name, theme in PRESETS.items():
@@ -222,6 +229,59 @@ def test_apply_theme_preserves_list_axes():
     assert merged["backgroundColor"] == "#ABCDEF"
     assert merged["title"]["text"] == "Revenue"
     assert merged["color"][0] == "#0B1F33"
+
+
+def test_chrome_defaults_title_legend_cartesian_grid():
+    """Default theme keeps title left and legend top-right with plot padding."""
+    vz.set_theme("default")
+    chart = vz.bar(
+        {"region": ["A", "B"], "sales": [1, 2]},
+        x="region",
+        y="sales",
+        title="Sales",
+    )
+    opt = chart.to_option()
+    assert opt["title"]["left"] == "left"
+    assert opt["title"]["top"] == 10
+    assert opt["legend"]["top"] == 10
+    assert opt["legend"]["right"] == 12
+    assert opt["grid"]["containLabel"] is True
+    assert opt["grid"]["top"] == 64
+
+
+def test_chrome_layout_overrides_win():
+    """Theme and merge_option layout keys override chrome defaults."""
+    vz.set_theme("default")
+    chart = vz.line(
+        {"x": [1, 2], "y": [3, 4]},
+        x="x",
+        y="y",
+        title="Trend",
+    ).merge_option(
+        {
+            "title": {"left": "center", "top": 0},
+            "legend": {"top": "bottom", "left": "center"},
+            "grid": {"top": 40, "bottom": 72, "containLabel": True},
+        }
+    )
+    opt = chart.to_option()
+    assert opt["title"]["left"] == "center"
+    assert opt["title"]["top"] == 0
+    assert opt["legend"]["top"] == "bottom"
+    assert opt["legend"]["left"] == "center"
+    assert opt["grid"]["top"] == 40
+    assert opt["grid"]["bottom"] == 72
+
+
+def test_non_cartesian_skips_plot_grid():
+    chart = vz.pie(
+        [{"name": "A", "value": 1}, {"name": "B", "value": 2}],
+        title="Share",
+    )
+    opt = chart.to_option()
+    assert "grid" not in opt or not isinstance(opt.get("grid"), dict) or "xAxis" in opt
+    assert "xAxis" not in opt
+    assert "grid" not in opt
 
 
 def test_series_defaults_for_line():

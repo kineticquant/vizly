@@ -9,11 +9,11 @@ import pandas as pd
 from vizly.data import (
     DataError,
     DataLike,
+    as_tabular,
     column_values,
     infer_roles,
     require_columns,
     resolve_y_columns,
-    standardize,
 )
 from vizly.theme.apply import series_defaults_for
 
@@ -21,11 +21,38 @@ YLike = Union[str, Sequence[str]]
 
 
 def prepare_frame(data: Optional[DataLike]) -> pd.DataFrame:
+    """Materialize chart input as a DataFrame via the TabularView spine.
+
+    Callers may pass DataFrame, list[dict], dict[list], TabularView, or
+    loader output. A DataFrame is not required at the call site.
+
+    When the input is already a pandas DataFrame, returns that frame without
+    an extra copy (builders treat it as read-only).
+    """
     if data is None:
         raise DataError(
-            "This chart requires data=. Pass a DataFrame, list[dict], or dict[list]."
+            "This chart requires data=. Pass a DataFrame, list[dict], "
+            "dict[list], TabularView, or loader output."
         )
-    return standardize(data)
+    table = as_tabular(data)
+    # Avoid a defensive copy when the spine already wraps a DataFrame.
+    to_pandas = getattr(table, "to_pandas", None)
+    if callable(to_pandas):
+        try:
+            return to_pandas(copy=False)
+        except TypeError:
+            return to_pandas()
+    return table.to_pandas()
+
+
+def prepare_table(data: Optional[DataLike]):
+    """Adapt chart input to TabularView without forcing a DataFrame."""
+    if data is None:
+        raise DataError(
+            "This chart requires data=. Pass a DataFrame, list[dict], "
+            "dict[list], TabularView, or loader output."
+        )
+    return as_tabular(data)
 
 
 def resolve_xy(

@@ -1,5 +1,39 @@
 # vizly
 
+[![PyPI](https://img.shields.io/pypi/v/vizly.svg?logo=pypi&logoColor=white)](https://pypi.org/project/vizly/)
+[![Python](https://img.shields.io/pypi/pyversions/vizly.svg?logo=python&logoColor=white)](https://pypi.org/project/vizly/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/kineticquant/vizly/blob/main/LICENSE)
+[![CI](https://img.shields.io/github/actions/workflow/status/kineticquant/vizly/ci.yml?branch=main&label=CI&logo=github)](https://github.com/kineticquant/vizly/actions/workflows/ci.yml)
+
+[![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)](#install)
+[![Apache%20ECharts](https://img.shields.io/badge/Apache%20ECharts-AA344D?logo=apache&logoColor=white)](#chart-inventory)
+[![pandas](https://img.shields.io/badge/pandas-150458?logo=pandas&logoColor=white)](#data-in)
+[![NumPy](https://img.shields.io/badge/NumPy-013243?logo=numpy&logoColor=white)](#data-in)
+[![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-D71F00?logo=sqlalchemy&logoColor=white)](#data-in)
+[![openpyxl](https://img.shields.io/badge/openpyxl-217346?logo=microsoftexcel&logoColor=white)](#data-in)
+
+[![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white)](#integrations)
+[![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)](#integrations)
+[![Flask](https://img.shields.io/badge/Flask-000000?logo=flask&logoColor=white)](#integrations)
+[![Django](https://img.shields.io/badge/Django-092E20?logo=django&logoColor=white)](#integrations)
+[![HTMX](https://img.shields.io/badge/HTMX-3366CC?logo=htmx&logoColor=white)](#integrations)
+[![Jupyter](https://img.shields.io/badge/Jupyter-F37626?logo=jupyter&logoColor=white)](#integrations)
+
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)](#data-in)
+[![MySQL](https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=white)](#data-in)
+[![MariaDB](https://img.shields.io/badge/MariaDB-003545?logo=mariadb&logoColor=white)](#data-in)
+[![SQLite](https://img.shields.io/badge/SQLite-003B57?logo=sqlite&logoColor=white)](#data-in)
+[![Oracle](https://img.shields.io/badge/Oracle-F80000?logo=oracle&logoColor=white)](#data-in)
+[![SQL%20Server](https://img.shields.io/badge/SQL%20Server-CC2927?logo=microsoftsqlserver&logoColor=white)](#data-in)
+[![Snowflake](https://img.shields.io/badge/Snowflake-29B5E8?logo=snowflake&logoColor=white)](#data-in)
+[![BigQuery](https://img.shields.io/badge/BigQuery-669DF6?logo=googlebigquery&logoColor=white)](#data-in)
+[![Redshift](https://img.shields.io/badge/Redshift-8C4FFF?logo=amazonredshift&logoColor=white)](#data-in)
+[![ClickHouse](https://img.shields.io/badge/ClickHouse-FFCC01?logo=clickhouse&logoColor=black)](#data-in)
+[![Databricks](https://img.shields.io/badge/Databricks-FF3621?logo=databricks&logoColor=white)](#data-in)
+[![MongoDB](https://img.shields.io/badge/MongoDB-47A248?logo=mongodb&logoColor=white)](#data-in)
+
+SQL via SQLAlchemy (`from_sql`): install the DBAPI/dialect for your database. Badges show common targets — see [CHANGELOG](CHANGELOG.md) for the full dialect tables.
+
 **Formal v1.** High-performance, low-boilerplate, fully themable Python charting over Apache ECharts.
 
 Ship production charts in a few lines of Python — DataFrame, records, columnar dict, file, or SQL in; HTML, JSON, or browser PNG out — without nested option builders. Built for speed (local assets, one ECharts load per page) and for native embeds in the stacks you already use.

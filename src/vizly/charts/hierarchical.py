@@ -65,12 +65,18 @@ class PieChart(BaseChart):
         series: Dict[str, Any] = {
             "type": "pie",
             "radius": ["45%", "70%"] if self._donut else "65%",
+            # Leave left band for the title; legend sits on the right.
+            "center": ["42%", "55%"],
             "data": data,
         }
         series = apply_series_defaults(series, self.theme, "pie")
         return {
             "tooltip": {"trigger": "item"},
-            "legend": {"orient": "vertical", "left": "left"},
+            "legend": {
+                "orient": "vertical",
+                "right": 12,
+                "top": "middle",
+            },
             "series": [series],
         }
 
@@ -487,3 +493,169 @@ class GraphChart(BaseChart):
                 }
             ],
         }
+
+
+class FlowchartChart(BaseChart):
+    """Process / dependency diagram via ECharts graph (not Mermaid).
+
+    Accepts edge records (source/target) and optional node table with
+    ``id``/``name`` and optional ``x``/``y``/``layer`` for layout.
+    Layouts: ``hierarchical`` (default layered), ``force``, ``none`` (fixed coords).
+    """
+
+    chart_type = "flowchart"
+
+    def __init__(
+        self,
+        data: Any = None,
+        *,
+        source: Optional[str] = None,
+        target: Optional[str] = None,
+        nodes: Any = None,
+        layout: str = "hierarchical",
+        title: Optional[str] = None,
+        width: Optional[str] = None,
+        height: Optional[str] = None,
+        theme: Any = None,
+        option: Any = None,
+        **kwargs: Any,
+    ) -> None:
+        super().__init__(
+            data,
+            title=title,
+            width=width,
+            height=height,
+            theme=theme,
+            option=option,
+            **kwargs,
+        )
+        self.source = source or "source"
+        self.target = target or "target"
+        self.nodes_data = nodes
+        self.layout = (layout or "hierarchical").strip().lower()
+
+    def _build(self) -> Dict[str, Any]:
+        df = prepare_frame(self.data)
+        require_columns(df, self.source, self.target)
+        sources = [str(s) for s in column_values(df, self.source)]
+        targets = [str(t) for t in column_values(df, self.target)]
+        node_names = list(dict.fromkeys([*sources, *targets]))
+
+        node_meta: Dict[str, Dict[str, Any]] = {n: {"name": n} for n in node_names}
+        if self.nodes_data is not None:
+            ndf = prepare_frame(self.nodes_data)
+            id_col = "id" if "id" in ndf.columns else ("name" if "name" in ndf.columns else None)
+            if id_col is None:
+                raise DataError(
+                    "flowchart nodes= requires an 'id' or 'name' column."
+                )
+            for _, row in ndf.iterrows():
+                nid = str(row[id_col])
+                meta: Dict[str, Any] = {"name": nid}
+                if "label" in ndf.columns and row["label"] is not None:
+                    meta["name"] = str(row["label"])
+                if "x" in ndf.columns and "y" in ndf.columns:
+                    try:
+                        meta["x"] = float(row["x"])
+                        meta["y"] = float(row["y"])
+                        meta["fixed"] = True
+                    except (TypeError, ValueError):
+                        pass
+                if "layer" in ndf.columns and row["layer"] is not None:
+                    meta["layer"] = int(row["layer"])
+                node_meta[nid] = meta
+                if nid not in node_names:
+                    node_names.append(nid)
+
+        # Hierarchical layout: assign layers by BFS from roots
+        layout_mode = self.layout
+        echarts_layout = "force"
+        if layout_mode == "none":
+            echarts_layout = "none"
+        elif layout_mode in {"hierarchical", "layered", "dag"}:
+            echarts_layout = "none"
+            layers = _flowchart_layers(node_names, sources, targets)
+            width_by_layer: Dict[int, int] = {}
+            for n, layer in layers.items():
+                width_by_layer[layer] = width_by_layer.get(layer, 0) + 1
+            counters: Dict[int, int] = {}
+            for n in node_names:
+                layer = layers.get(n, 0)
+                idx = counters.get(layer, 0)
+                counters[layer] = idx + 1
+                total = max(width_by_layer.get(layer, 1), 1)
+                meta = node_meta.setdefault(n, {"name": n})
+                if "x" not in meta:
+                    meta["x"] = 80 + layer * 180
+                    meta["y"] = 60 + idx * (360 / total)
+                    meta["fixed"] = True
+
+        nodes = []
+        for n in node_names:
+            meta = node_meta.get(n, {"name": n})
+            item: Dict[str, Any] = {
+                "id": n,
+                "name": str(meta.get("name", n)),
+                "symbol": "roundRect",
+                "symbolSize": meta.get("symbolSize", [120, 48]),
+                "label": {"show": True, "formatter": "{b}"},
+            }
+            if "x" in meta and "y" in meta:
+                item["x"] = meta["x"]
+                item["y"] = meta["y"]
+                item["fixed"] = bool(meta.get("fixed", True))
+            nodes.append(item)
+
+        links = [
+            {
+                "source": s,
+                "target": t,
+                "lineStyle": {"curveness": 0.05},
+            }
+            for s, t in zip(sources, targets)
+        ]
+        series: Dict[str, Any] = {
+            "type": "graph",
+            "layout": echarts_layout,
+            "roam": True,
+            "draggable": True,
+            "data": nodes,
+            "links": links,
+            "edgeSymbol": ["none", "arrow"],
+            "edgeSymbolSize": [0, 12],
+            "label": {"show": True},
+            "lineStyle": {"color": "#64748B", "width": 1.5},
+        }
+        if echarts_layout == "force":
+            series["force"] = {"repulsion": 260, "edgeLength": 120}
+        return {"tooltip": {}, "series": [series]}
+
+
+def _flowchart_layers(
+    nodes: List[str],
+    sources: List[str],
+    targets: List[str],
+) -> Dict[str, int]:
+    from collections import defaultdict, deque
+
+    children: Dict[str, List[str]] = defaultdict(list)
+    indeg: Dict[str, int] = {n: 0 for n in nodes}
+    for s, t in zip(sources, targets):
+        children[s].append(t)
+        indeg[t] = indeg.get(t, 0) + 1
+        indeg.setdefault(s, indeg.get(s, 0))
+    roots = [n for n in nodes if indeg.get(n, 0) == 0] or (nodes[:1] if nodes else [])
+    layers: Dict[str, int] = {}
+    q = deque((r, 0) for r in roots)
+    while q:
+        node, layer = q.popleft()
+        if node in layers:
+            continue
+        layers[node] = layer
+        for child in children.get(node, []):
+            if child not in layers:
+                q.append((child, layer + 1))
+    for n in nodes:
+        layers.setdefault(n, 0)
+    return layers
+

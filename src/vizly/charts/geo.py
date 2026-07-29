@@ -3,15 +3,19 @@
 Trust posture (vendored/allowlisted assets, English-first ``en-US`` chrome) is
 separate from geography: the default map is the world atlas. USA is a bundled
 regional pack; China administrative packs remain explicit opt-in only.
+
+GeoJSON **overlays** use :mod:`vizly.geo_layers` (segregated from
+``register_map_pack`` basemap registration).
 """
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Sequence, Union
 
 from vizly.base import BaseChart
 from vizly.charts._helpers import prepare_frame
 from vizly.data import DataError, column_values, require_columns
+from vizly.geo_layers import GeoLayer, merge_geo_layers
 from vizly.maps import resolve_map_geojson
 
 
@@ -34,6 +38,9 @@ class MapChart(BaseChart):
         names: Optional[str] = None,
         values: Optional[str] = None,
         map: str = "world",  # noqa: A002 — chart API; worldwide default
+        name_field: Optional[str] = None,
+        id_field: Optional[str] = None,
+        layers: Optional[Sequence[Union[GeoLayer, Any]]] = None,
         title: Optional[str] = None,
         width: Optional[str] = None,
         height: Optional[str] = None,
@@ -53,6 +60,12 @@ class MapChart(BaseChart):
         self.names = names or "name"
         self.values = values or "value"
         self.map_name = _normalize_map_name(map)
+        self.name_field = name_field or self.names
+        self.id_field = id_field
+        self.layers: List[GeoLayer] = [
+            lyr if isinstance(lyr, GeoLayer) else GeoLayer(lyr)
+            for lyr in (layers or [])
+        ]
         self._maps_loaded = False
 
     def _ensure_maps(self) -> None:
@@ -61,6 +74,10 @@ class MapChart(BaseChart):
             return
         geo = resolve_map_geojson(self.map_name)
         self._register_maps = {self.map_name: geo}
+        for layer in self.layers:
+            if layer.geojson.get("type") in {"FeatureCollection", "Feature"}:
+                pack = f"vizly_layer_{layer.name}"
+                self._register_maps[pack] = layer.geojson
         self._maps_loaded = True
 
     def to_html(
@@ -81,14 +98,25 @@ class MapChart(BaseChart):
 
     def _build(self) -> Dict[str, Any]:
         df = prepare_frame(self.data)
-        require_columns(df, self.names, self.values)
-        names = column_values(df, self.names)
+        name_col = self.name_field or self.names
+        require_columns(df, name_col, self.values)
+        names = column_values(df, name_col)
         values = column_values(df, self.values)
-        data = [{"name": str(n), "value": v} for n, v in zip(names, values)]
+        ids = (
+            column_values(df, self.id_field)
+            if self.id_field and self.id_field in df.columns
+            else [None] * len(names)
+        )
+        data = []
+        for n, v, i in zip(names, values, ids):
+            item: Dict[str, Any] = {"name": str(n), "value": v}
+            if i is not None:
+                item["id"] = i
+            data.append(item)
         nums = [v for v in values if isinstance(v, (int, float))]
         vmin = min(nums) if nums else 0
         vmax = max(nums) if nums else 1
-        return {
+        option: Dict[str, Any] = {
             "tooltip": {"trigger": "item"},
             "visualMap": {
                 "min": vmin,
@@ -103,10 +131,22 @@ class MapChart(BaseChart):
                     "map": self.map_name,
                     "roam": True,
                     "data": data,
+                    "nameProperty": self.name_field or "name",
                     "emphasis": {"label": {"show": True}},
                 }
             ],
         }
+        if self.layers:
+            # Shared geo roam for basemap + overlays (points/lines/polygons).
+            option["geo"] = {
+                "map": self.map_name,
+                "roam": True,
+                "emphasis": {"label": {"show": True}},
+            }
+            option["series"][0]["geoIndex"] = 0
+            option["series"][0].pop("roam", None)
+            option = merge_geo_layers(option, self.layers, map_name=self.map_name)
+        return option
 
 
 class GeoChart(BaseChart):
@@ -127,6 +167,7 @@ class GeoChart(BaseChart):
         lat: Optional[str] = None,
         values: Optional[str] = None,
         map: str = "world",  # noqa: A002
+        layers: Optional[Sequence[Union[GeoLayer, Any]]] = None,
         title: Optional[str] = None,
         width: Optional[str] = None,
         height: Optional[str] = None,
@@ -148,6 +189,10 @@ class GeoChart(BaseChart):
         self.lat = lat
         self.values = values
         self.map_name = _normalize_map_name(map)
+        self.layers: List[GeoLayer] = [
+            lyr if isinstance(lyr, GeoLayer) else GeoLayer(lyr)
+            for lyr in (layers or [])
+        ]
         self._maps_loaded = False
 
     def _ensure_maps(self) -> None:
@@ -155,6 +200,9 @@ class GeoChart(BaseChart):
             return
         geo = resolve_map_geojson(self.map_name)
         self._register_maps = {self.map_name: geo}
+        for layer in self.layers:
+            pack = f"vizly_layer_{layer.name}"
+            self._register_maps[pack] = layer.geojson
         self._maps_loaded = True
 
     def to_html(
@@ -173,7 +221,7 @@ class GeoChart(BaseChart):
             include_assets=include_assets,
         )
 
-    def _resolve_lng_lat(self, df) -> tuple[str, str]:
+    def _resolve_lng_lat(self, df) -> tuple:
         lng = self.lng
         lat = self.lat
         if lng is None:
@@ -232,7 +280,7 @@ class GeoChart(BaseChart):
                     ) from exc
             data.append(item)
 
-        return {
+        option: Dict[str, Any] = {
             "tooltip": {"trigger": "item"},
             "geo": {
                 "map": self.map_name,
@@ -248,3 +296,6 @@ class GeoChart(BaseChart):
                 }
             ],
         }
+        if self.layers:
+            option = merge_geo_layers(option, self.layers, map_name=self.map_name)
+        return option

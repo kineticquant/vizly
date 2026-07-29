@@ -1,9 +1,13 @@
 # vizly
 
+**Status**
+
 [![PyPI](https://img.shields.io/pypi/v/vizly.svg?logo=pypi&logoColor=white)](https://pypi.org/project/vizly/)
-[![Python](https://img.shields.io/pypi/pyversions/vizly.svg?logo=python&logoColor=white)](https://pypi.org/project/vizly/)
+[![Python versions](https://img.shields.io/pypi/pyversions/vizly.svg?logo=python&logoColor=white)](https://pypi.org/project/vizly/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/kineticquant/vizly/blob/main/LICENSE)
 [![CI](https://img.shields.io/github/actions/workflow/status/kineticquant/vizly/ci.yml?branch=main&label=CI&logo=github)](https://github.com/kineticquant/vizly/actions/workflows/ci.yml)
+
+**Built on**
 
 [![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)](#install)
 [![Apache%20ECharts](https://img.shields.io/badge/Apache%20ECharts-AA344D?logo=apache&logoColor=white)](#chart-inventory)
@@ -12,6 +16,8 @@
 [![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-D71F00?logo=sqlalchemy&logoColor=white)](#data-in)
 [![openpyxl](https://img.shields.io/badge/openpyxl-217346?logo=microsoftexcel&logoColor=white)](#data-in)
 
+**Frameworks supported**
+
 [![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white)](#integrations)
 [![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)](#integrations)
 [![Flask](https://img.shields.io/badge/Flask-000000?logo=flask&logoColor=white)](#integrations)
@@ -19,12 +25,19 @@
 [![HTMX](https://img.shields.io/badge/HTMX-3366CC?logo=htmx&logoColor=white)](#integrations)
 [![Jupyter](https://img.shields.io/badge/Jupyter-F37626?logo=jupyter&logoColor=white)](#integrations)
 
+**Databases supported** (via SQLAlchemy `from_sql`; install the DBAPI/dialect yourself)
+
+SQLAlchemy **included** dialects (ship with SQLAlchemy; add the driver):
+
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)](#data-in)
 [![MySQL](https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=white)](#data-in)
 [![MariaDB](https://img.shields.io/badge/MariaDB-003545?logo=mariadb&logoColor=white)](#data-in)
 [![SQLite](https://img.shields.io/badge/SQLite-003B57?logo=sqlite&logoColor=white)](#data-in)
 [![Oracle](https://img.shields.io/badge/Oracle-F80000?logo=oracle&logoColor=white)](#data-in)
 [![SQL%20Server](https://img.shields.io/badge/SQL%20Server-CC2927?logo=microsoftsqlserver&logoColor=white)](#data-in)
+
+Also reachable when you install an **external** SQLAlchemy dialect (examples; not a closed list):
+
 [![Snowflake](https://img.shields.io/badge/Snowflake-29B5E8?logo=snowflake&logoColor=white)](#data-in)
 [![BigQuery](https://img.shields.io/badge/BigQuery-669DF6?logo=googlebigquery&logoColor=white)](#data-in)
 [![Redshift](https://img.shields.io/badge/Redshift-8C4FFF?logo=amazonredshift&logoColor=white)](#data-in)
@@ -32,14 +45,14 @@
 [![Databricks](https://img.shields.io/badge/Databricks-FF3621?logo=databricks&logoColor=white)](#data-in)
 [![MongoDB](https://img.shields.io/badge/MongoDB-47A248?logo=mongodb&logoColor=white)](#data-in)
 
-SQL via SQLAlchemy (`from_sql`): install the DBAPI/dialect for your database. Badges show common targets — see [CHANGELOG](CHANGELOG.md) for the full dialect tables.
+vizly does **not** vendor DB drivers or run CI against every database. If SQLAlchemy can connect and return rows, `from_sql` can chart them. Full dialect tables: [CHANGELOG](CHANGELOG.md) / [v1.0.0 release notes](releases/v1.0.0/RELEASE.md).
 
 **Formal v1.** High-performance, low-boilerplate, fully themable Python charting over Apache ECharts.
 
-Ship production charts in a few lines of Python — DataFrame, records, columnar dict, file, or SQL in; HTML, JSON, or browser PNG out — without nested option builders. Built for speed (local assets, one ECharts load per page) and for native embeds in the stacks you already use.
+Ship production charts in a few lines of Python: DataFrame, records, columnar dict, file, or SQL in; HTML, JSON, or browser PNG out. No nested option builders. Built for speed (local assets, one ECharts load per page) and for native embeds in the stacks you already use.
 
 - **Easy to use**: set a theme, call `vz.line` / `vz.bar` / …, export with `to_html()`, `to_option()`, or browser `toDataURL` / `downloadImage`
-- **Data without forced DataFrames**: pass `list[dict]`, `dict[list]`, loader output, or pandas — pandas remains a dependency, not a required call-site API
+- **Data without forced DataFrames**: pass `list[dict]`, `dict[list]`, loader output, or pandas (pandas remains a dependency, not a required call-site API)
 - **SQL and files in base**: `from_sql`, `from_csv`, `from_tsv`, `from_json`, `from_excel` (no `vizly[sql]` extra)
 - **Highly performant**: vendored JS by default; GL and plugins load only when a chart needs them
 - **Worldwide maps by default**: bundled world atlas plus `usa`; GeoJSON **overlays** via `overlay_geojson` (separate from basemap packs)
@@ -221,7 +234,7 @@ Images come from the **browser that already rendered the chart** (ECharts
 `getDataURL`). vizly does **not** ship Chromium.
 
 ```javascript
-// After any HTML embed — chart id is on the root .vizly-chart element
+// After any HTML embed: chart id is on the root .vizly-chart element
 const id = document.querySelector(".vizly-chart").id;
 window.__vizly[id].toDataURL({ type: "png", pixelRatio: 2 });
 window.__vizly[id].downloadImage("chart.png");
@@ -278,7 +291,7 @@ st_dashboard([c1, c2], height=900)            # many charts, ECharts once
 
 ### FastAPI / Flask / Django
 
-Same as before — see `examples/fastapi_app.py`, `examples/flask_app.py`, `examples/django_demo/`.
+Same as before. See `examples/fastapi_app.py`, `examples/flask_app.py`, `examples/django_demo/`.
 
 ### HTMX
 
@@ -303,7 +316,7 @@ Escape hatches: `chart.update(...)`, `chart.merge_option({...})`, `chart.set_dat
 
 ### Title / legend layout
 
-Defaults keep chrome clear of the plot: title **left**, legend **top-right**, and cartesian `grid` padding with `containLabel`. These are defaults only — override any time:
+Defaults keep chrome clear of the plot: title **left**, legend **top-right**, and cartesian `grid` padding with `containLabel`. These are defaults only. Override any time:
 
 ```python
 chart.merge_option({
@@ -359,5 +372,5 @@ Full testing runbook: **[TESTING.md](TESTING.md)**. Also [CHANGELOG.md](CHANGELO
 
 - **SPA / JSON + maps:** `to_option()` / `json_response` return the ECharts option only. They do **not** embed GeoJSON. HTML rendering calls `echarts.registerMap` for you; SPA clients must register map packs themselves (or use HTML embeds).
 - **page / tab JSON:** `to_option()` returns a compose descriptor under `_vizly_compose` (child options). Use HTML embeds (`dashboard_html` / `to_html`) for browser layout.
-- **Flowchart:** process/dependency diagrams — not Mermaid syntax, BPMN, swimlanes, or sequence diagrams.
+- **Flowchart:** process/dependency diagrams, not Mermaid syntax, BPMN, swimlanes, or sequence diagrams.
 - **Export:** PNG/JPEG/SVG via browser `toDataURL` / `downloadImage`. No server-side Chromium in vizly.

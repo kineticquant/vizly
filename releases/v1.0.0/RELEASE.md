@@ -1,11 +1,11 @@
-# vizly v1.0.0 — Formal release notes
+# vizly v1.0.0 Formal release notes
 
 **Release date:** 2026-07-28  
 **Python:** 3.9 or later (CI: 3.9–3.13)  
 **Runtime deps:** `pandas`, `numpy`, `sqlalchemy`, `openpyxl` (no pyecharts)  
 **Maintainer:** Kineticquant
 
-These are the **official Formal v1** release notes for vizly. They describe the full product as shipped in **1.0.0** — every supported capability — not only the delta from a prior preview tag. Chronological diffs live in [CHANGELOG.md](../../CHANGELOG.md) and under `releases/v0.2.x/`.
+These are the **official Formal v1** release notes for vizly. They describe the full product as shipped in **1.0.0**: every supported capability, not only the delta from a prior preview tag. Chronological diffs live in [CHANGELOG.md](../../CHANGELOG.md) and under `releases/v0.2.x/`.
 
 ---
 
@@ -13,12 +13,12 @@ These are the **official Formal v1** release notes for vizly. They describe the 
 
 **vizly** is a high-performance, low-boilerplate, fully themable Python charting library over Apache ECharts.
 
-Ship production charts in a few lines of Python — DataFrame, records, columnar dict, file, or SQL in; HTML, JSON, or browser image out — without nested option builders. Built for speed (local assets, one ECharts load per page) and for native embeds in the stacks you already use.
+Ship production charts in a few lines of Python: DataFrame, records, columnar dict, file, or SQL in; HTML, JSON, or browser image out. No nested option builders. Built for speed (local assets, one ECharts load per page) and for native embeds in the stacks you already use.
 
 | Pillar | What 1.0.0 delivers |
 |--------|---------------------|
 | Easy to use | Set a theme, call `vz.line` / `vz.bar` / …, export with `to_html()`, `to_option()`, or browser `toDataURL` / `downloadImage` |
-| Data without forced DataFrames | Pass `list[dict]`, `dict[list]`, loader output, or pandas — pandas is a dependency, not a required call-site API |
+| Data without forced DataFrames | Pass `list[dict]`, `dict[list]`, loader output, or pandas (pandas is a dependency, not a required call-site API) |
 | SQL and files in base | `from_sql`, `from_csv`, `from_tsv`, `from_json`, `from_excel` (no `vizly[sql]` extra) |
 | Highly performant | Vendored JS by default; GL and plugins load only when a chart needs them |
 | Worldwide maps by default | Bundled world atlas plus `usa`; GeoJSON overlays via `overlay_geojson` (separate from basemap packs) |
@@ -31,18 +31,18 @@ Ship production charts in a few lines of Python — DataFrame, records, columnar
 
 ## Capability summary (full Formal v1 surface)
 
-1. **Chart factories** — sugar constructors, universal `vz.chart`, `vz.from_option`, theme + merge escape hatches.
-2. **40 chart types** — including flowchart/diagram, 3D (GL), wordcloud, liquid, and compose layouts.
-3. **TabularView ingest** — pandas, records, columnar, CSV/TSV/JSON/Excel, SQL via SQLAlchemy, optional Polars/Arrow duck-typing.
-4. **Ops JSON normalizers** — Prometheus, CloudWatch, Elasticsearch / ELK (no live API calls).
-5. **Theme engine** — builtins (product, ops-inspired, editor-inspired), register/load/export, session + per-chart override, `en-US` locale default.
-6. **Default chrome** — title left, legend top-right, cartesian `grid` padding with `containLabel` (overridable).
-7. **Maps** — world default, bundled `usa`, opt-in `register_map_pack`, join keys, GeoJSON overlays segregated from basemap packs.
-8. **Events and dashboards** — click/`postMessage`, Streamlit component return, HTMX listener, linked brush via `echarts.connect`, live update helpers.
-9. **Browser image export** — ECharts `getDataURL` via `toDataURL` / `downloadImage`; optional toolbox `saveAsImage`. No in-package Chromium.
-10. **Shared embed contract** — full document, fragment, dashboard (one ECharts load), JSON — used by every framework helper.
-11. **Trust posture** — vendored assets default; CDN allowlist only; banned China-primary CDN/map defaults.
-12. **Quality gates** — contract tests, sample/option goldens, Playwright browser smoke, CI + tag-based PyPI publish.
+1. **Chart factories:** sugar constructors, universal `vz.chart`, `vz.from_option`, theme + merge escape hatches.
+2. **40 chart types:** including flowchart/diagram, 3D (GL), wordcloud, liquid, and compose layouts.
+3. **TabularView ingest:** pandas, records, columnar, CSV/TSV/JSON/Excel, SQL via SQLAlchemy, optional Polars/Arrow duck-typing.
+4. **Ops JSON normalizers:** Prometheus, CloudWatch, Elasticsearch / ELK (no live API calls).
+5. **Theme engine:** builtins (product, ops-inspired, editor-inspired), register/load/export, session + per-chart override, `en-US` locale default.
+6. **Default chrome:** title left, legend top-right, cartesian `grid` padding with `containLabel` (overridable).
+7. **Maps:** world default, bundled `usa`, opt-in `register_map_pack`, join keys, GeoJSON overlays segregated from basemap packs.
+8. **Events and dashboards:** click/`postMessage`, Streamlit component return, HTMX listener, linked brush via `echarts.connect`, live update helpers.
+9. **Browser image export:** ECharts `getDataURL` via `toDataURL` / `downloadImage`; optional toolbox `saveAsImage`. No in-package Chromium.
+10. **Shared embed contract:** full document, fragment, dashboard (one ECharts load), JSON. Used by every framework helper.
+11. **Trust posture:** vendored assets default; CDN allowlist only; banned China-primary CDN/map defaults.
+12. **Quality gates:** contract tests, sample/option goldens, Playwright browser smoke, CI + tag-based PyPI publish.
 
 ---
 
@@ -274,7 +274,7 @@ Theme `locale` defaults to `en-US` and is passed to `echarts.init` as `EN` / `ZH
 
 ### Title / legend layout (chrome)
 
-Defaults keep chrome clear of the plot: title **left**, legend **top-right**, and cartesian `grid` padding with `containLabel`. These are defaults only — override any time via `merge_option` or theme `title` / `legend` keys.
+Defaults keep chrome clear of the plot: title **left**, legend **top-right**, and cartesian `grid` padding with `containLabel`. These are defaults only. Override any time via `merge_option` or theme `title` / `legend` keys.
 
 ```python
 chart.merge_option({
@@ -317,7 +317,7 @@ vz.line(table, x="timestamp", y="value")
 | Introspection | `list_bundled_maps()`, `list_opt_in_maps()` | Bundled vs opt-in geography |
 | Low-level | `load_map_geojson(name)`, `map_path(name)` | Path / GeoJSON helpers |
 
-Default atlas is **world**. Bundled regional pack: `usa`. Extra regional packs are **not** bundled by default — register them when you need them. China administrative packs remain **opt-in** via `register_map_pack` only. No Baidu Map defaults.
+Default atlas is **world**. Bundled regional pack: `usa`. Extra regional packs are **not** bundled by default. Register them when you need them. China administrative packs remain **opt-in** via `register_map_pack` only. No Baidu Map defaults.
 
 Polygon overlays use outline lines plus HTML custom fill series; map + layers can share `geo` roam when `layers=` is set.
 
@@ -334,7 +334,7 @@ HTML embeds emit a structured `vizly:event` CustomEvent and `postMessage` payloa
 | Click `postMessage` | Defaults to same-origin; Streamlit opts into `"*"` for the component bridge |
 | Streamlit | `st_vizly(..., events=True)` returns the last click payload via a declared component |
 | HTMX | `htmx_event_listener_js("/detail")` POSTs clicks without reloading ECharts |
-| SPA / JSON | `to_option()` does **not** auto-wire drill — attach `chart.on('click', …)` after `echarts.init` |
+| SPA / JSON | `to_option()` does **not** auto-wire drill. Attach `chart.on('click', …)` after `echarts.init` |
 | Filter helpers | `filter_by_click` / `filter_tabular` for categorical and map drill |
 | Live refresh | `chart.set_data(...)`; browser `window.__vizly[id].setOption(...)` |
 | Linked dashboards | `echarts.connect` on `page` / `dashboard_html` / `st_dashboard` (`connect=True` default; `connect=False` to opt out) |
@@ -400,7 +400,7 @@ Smart asset loading: `assets_html(charts=...)` and Django `{% vizly_assets chart
 
 ## Integrations
 
-Shared embed contract in `vizly.integrations` — do not fork embed logic per framework.
+Shared embed contract in `vizly.integrations`. Do not fork embed logic per framework.
 
 | Helper | Output |
 |--------|--------|
@@ -491,7 +491,7 @@ Full runbook: [TESTING.md](../../TESTING.md). Publish process: [RELEASE.md](../.
 
 - **SPA / JSON + maps:** `to_option()` / `json_response` return the ECharts option only. They do **not** embed GeoJSON. HTML rendering calls `echarts.registerMap` for you; SPA clients must register map packs themselves (or use HTML embeds).
 - **page / tab JSON:** `to_option()` returns a compose descriptor under `_vizly_compose` (child options). Use HTML embeds for browser layout.
-- **Flowchart:** process/dependency diagrams — not Mermaid syntax, BPMN, swimlanes, or sequence diagrams.
+- **Flowchart:** process/dependency diagrams, not Mermaid syntax, BPMN, swimlanes, or sequence diagrams.
 - **Export:** PNG/JPEG/SVG via browser `toDataURL` / `downloadImage`. No server-side Chromium in vizly.
 - **SQL drivers:** vizly depends on SQLAlchemy; install the DBAPI / dialect for your database yourself.
 - **Streamlit:** each single-chart `st_vizly` call uses a separate iframe; prefer `st_dashboard` for many charts.
@@ -502,7 +502,7 @@ Full runbook: [TESTING.md](../../TESTING.md). Publish process: [RELEASE.md](../.
 
 1. Install or upgrade to `vizly==1.0.0` (pulls `sqlalchemy` and `openpyxl` as direct deps).
 2. Prefer loaders / tabular inputs where you previously always built DataFrames by hand.
-3. For maps with overlays, use `layers=` / `overlay_geojson` — do not treat geo layers as `register_map_pack` substitutes for choropleth packs.
+3. For maps with overlays, use `layers=` / `overlay_geojson`. Do not treat geo layers as `register_map_pack` substitutes for choropleth packs.
 4. For images, use client `toDataURL` / `downloadImage` (or external headless on `to_html()`). Do not expect `vizly[export]`.
 5. Review default chrome if you relied on earlier title/legend placement; override via theme or `merge_option` if needed.
 6. Multi-chart Django/Streamlit pages: load assets once (`{% vizly_assets %}` / `st_dashboard`) and use fragments without reloading ECharts.

@@ -20,15 +20,23 @@
           "#5B4B8A",
           "#2D9CDB"
         ],
+        "grid": {
+          "bottom": 28,
+          "containLabel": true,
+          "left": 12,
+          "right": 16,
+          "top": 64
+        },
         "legend": {
           "data": [
             "sales"
           ],
+          "right": 12,
           "show": true,
           "textStyle": {
             "color": "#374151"
           },
-          "top": "2%"
+          "top": 10
         },
         "series": [
           {
@@ -53,12 +61,14 @@
           "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
         },
         "title": {
+          "left": "left",
           "text": "Sales by region",
           "textStyle": {
             "color": "#111827",
             "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",
             "fontWeight": 600
-          }
+          },
+          "top": 10
         },
         "tooltip": {
           "backgroundColor": "rgba(255,255,255,0.96)",
@@ -135,16 +145,20 @@
           "#2D9CDB"
         ],
         "legend": {
-          "left": "left",
           "orient": "vertical",
+          "right": 12,
           "show": true,
           "textStyle": {
             "color": "#374151"
           },
-          "top": "2%"
+          "top": "middle"
         },
         "series": [
           {
+            "center": [
+              "42%",
+              "55%"
+            ],
             "data": [
               {
                 "name": "Enterprise",
@@ -179,12 +193,14 @@
           "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
         },
         "title": {
+          "left": "left",
           "text": "Segment mix",
           "textStyle": {
             "color": "#111827",
             "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",
             "fontWeight": 600
-          }
+          },
+          "top": 10
         },
         "tooltip": {
           "backgroundColor": "rgba(255,255,255,0.96)",
@@ -216,11 +232,12 @@
             "Nova",
             "Pulse"
           ],
+          "right": 12,
           "show": true,
           "textStyle": {
             "color": "#374151"
           },
-          "top": "2%"
+          "top": 10
         },
         "radar": {
           "indicator": [
@@ -288,12 +305,14 @@
           "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
         },
         "title": {
+          "left": "left",
           "text": "Capability radar",
           "textStyle": {
             "color": "#111827",
             "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",
             "fontWeight": 600
-          }
+          },
+          "top": 10
         },
         "tooltip": {
           "backgroundColor": "rgba(255,255,255,0.96)",
@@ -321,23 +340,26 @@
     "#2D9CDB"
   ],
   "legend": {
+    "right": 12,
     "show": true,
     "textStyle": {
       "color": "#374151"
     },
-    "top": "2%"
+    "top": 10
   },
   "textStyle": {
     "color": "#111827",
     "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
   },
   "title": {
+    "left": "left",
     "text": "Tab showcase",
     "textStyle": {
       "color": "#111827",
       "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",
       "fontWeight": 600
-    }
+    },
+    "top": 10
   },
   "tooltip": {
     "backgroundColor": "rgba(255,255,255,0.96)",

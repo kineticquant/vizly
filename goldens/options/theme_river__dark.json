@@ -13,11 +13,12 @@
     "#A5B4FC"
   ],
   "legend": {
+    "right": 12,
     "show": true,
     "textStyle": {
       "color": "#CBD5E1"
     },
-    "top": "2%"
+    "top": 10
   },
   "series": [
     {
@@ -194,12 +195,14 @@
     "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
   },
   "title": {
+    "left": "left",
     "text": "Channel mix over time",
     "textStyle": {
       "color": "#F1F5F9",
       "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",
       "fontWeight": 600
-    }
+    },
+    "top": 10
   },
   "tooltip": {
     "backgroundColor": "rgba(15,23,42,0.96)",

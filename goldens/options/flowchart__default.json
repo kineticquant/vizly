@@ -1,0 +1,263 @@
+{
+  "animation": true,
+  "animationDuration": 400,
+  "backgroundColor": "#FFFFFF",
+  "color": [
+    "#0B1F33",
+    "#2F6FED",
+    "#12A594",
+    "#E2A03F",
+    "#D64545",
+    "#7C8C9E",
+    "#5B4B8A",
+    "#2D9CDB"
+  ],
+  "legend": {
+    "right": 12,
+    "show": true,
+    "textStyle": {
+      "color": "#374151"
+    },
+    "top": 10
+  },
+  "series": [
+    {
+      "data": [
+        {
+          "fixed": true,
+          "id": "Traffic",
+          "label": {
+            "formatter": "{b}",
+            "show": true
+          },
+          "name": "Traffic",
+          "symbol": "roundRect",
+          "symbolSize": [
+            120,
+            48
+          ],
+          "x": 80,
+          "y": 60.0
+        },
+        {
+          "fixed": true,
+          "id": "Organic",
+          "label": {
+            "formatter": "{b}",
+            "show": true
+          },
+          "name": "Organic",
+          "symbol": "roundRect",
+          "symbolSize": [
+            120,
+            48
+          ],
+          "x": 260,
+          "y": 60.0
+        },
+        {
+          "fixed": true,
+          "id": "Paid",
+          "label": {
+            "formatter": "{b}",
+            "show": true
+          },
+          "name": "Paid",
+          "symbol": "roundRect",
+          "symbolSize": [
+            120,
+            48
+          ],
+          "x": 260,
+          "y": 180.0
+        },
+        {
+          "fixed": true,
+          "id": "Referral",
+          "label": {
+            "formatter": "{b}",
+            "show": true
+          },
+          "name": "Referral",
+          "symbol": "roundRect",
+          "symbolSize": [
+            120,
+            48
+          ],
+          "x": 260,
+          "y": 300.0
+        },
+        {
+          "fixed": true,
+          "id": "Signup",
+          "label": {
+            "formatter": "{b}",
+            "show": true
+          },
+          "name": "Signup",
+          "symbol": "roundRect",
+          "symbolSize": [
+            120,
+            48
+          ],
+          "x": 440,
+          "y": 60.0
+        },
+        {
+          "fixed": true,
+          "id": "Trial",
+          "label": {
+            "formatter": "{b}",
+            "show": true
+          },
+          "name": "Trial",
+          "symbol": "roundRect",
+          "symbolSize": [
+            120,
+            48
+          ],
+          "x": 620,
+          "y": 60.0
+        },
+        {
+          "fixed": true,
+          "id": "Churn",
+          "label": {
+            "formatter": "{b}",
+            "show": true
+          },
+          "name": "Churn",
+          "symbol": "roundRect",
+          "symbolSize": [
+            120,
+            48
+          ],
+          "x": 620,
+          "y": 240.0
+        },
+        {
+          "fixed": true,
+          "id": "Paid plan",
+          "label": {
+            "formatter": "{b}",
+            "show": true
+          },
+          "name": "Paid plan",
+          "symbol": "roundRect",
+          "symbolSize": [
+            120,
+            48
+          ],
+          "x": 800,
+          "y": 60.0
+        }
+      ],
+      "draggable": true,
+      "edgeSymbol": [
+        "none",
+        "arrow"
+      ],
+      "edgeSymbolSize": [
+        0,
+        12
+      ],
+      "label": {
+        "show": true
+      },
+      "layout": "none",
+      "lineStyle": {
+        "color": "#64748B",
+        "width": 1.5
+      },
+      "links": [
+        {
+          "lineStyle": {
+            "curveness": 0.05
+          },
+          "source": "Traffic",
+          "target": "Organic"
+        },
+        {
+          "lineStyle": {
+            "curveness": 0.05
+          },
+          "source": "Traffic",
+          "target": "Paid"
+        },
+        {
+          "lineStyle": {
+            "curveness": 0.05
+          },
+          "source": "Traffic",
+          "target": "Referral"
+        },
+        {
+          "lineStyle": {
+            "curveness": 0.05
+          },
+          "source": "Organic",
+          "target": "Signup"
+        },
+        {
+          "lineStyle": {
+            "curveness": 0.05
+          },
+          "source": "Paid",
+          "target": "Signup"
+        },
+        {
+          "lineStyle": {
+            "curveness": 0.05
+          },
+          "source": "Referral",
+          "target": "Signup"
+        },
+        {
+          "lineStyle": {
+            "curveness": 0.05
+          },
+          "source": "Signup",
+          "target": "Trial"
+        },
+        {
+          "lineStyle": {
+            "curveness": 0.05
+          },
+          "source": "Signup",
+          "target": "Churn"
+        },
+        {
+          "lineStyle": {
+            "curveness": 0.05
+          },
+          "source": "Trial",
+          "target": "Paid plan"
+        }
+      ],
+      "roam": true,
+      "type": "graph"
+    }
+  ],
+  "textStyle": {
+    "color": "#111827",
+    "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
+  },
+  "title": {
+    "left": "left",
+    "text": "Process flow",
+    "textStyle": {
+      "color": "#111827",
+      "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",
+      "fontWeight": 600
+    },
+    "top": 10
+  },
+  "tooltip": {
+    "backgroundColor": "rgba(255,255,255,0.96)",
+    "borderColor": "#E5E7EB",
+    "borderWidth": 1,
+    "textStyle": {
+      "color": "#111827"
+    }
+  }
+}

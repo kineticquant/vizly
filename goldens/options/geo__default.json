@@ -22,11 +22,12 @@
     "roam": true
   },
   "legend": {
+    "right": 12,
     "show": true,
     "textStyle": {
       "color": "#374151"
     },
-    "top": "2%"
+    "top": 10
   },
   "series": [
     {
@@ -106,12 +107,14 @@
     "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
   },
   "title": {
+    "left": "left",
     "text": "City demand",
     "textStyle": {
       "color": "#111827",
       "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",
       "fontWeight": 600
-    }
+    },
+    "top": 10
   },
   "tooltip": {
     "backgroundColor": "rgba(255,255,255,0.96)",

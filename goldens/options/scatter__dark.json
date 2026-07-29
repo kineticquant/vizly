@@ -12,12 +12,20 @@
     "#FDBA74",
     "#A5B4FC"
   ],
+  "grid": {
+    "bottom": 28,
+    "containLabel": true,
+    "left": 12,
+    "right": 16,
+    "top": 64
+  },
   "legend": {
+    "right": 12,
     "show": true,
     "textStyle": {
       "color": "#CBD5E1"
     },
-    "top": "2%"
+    "top": 10
   },
   "series": [
     {
@@ -176,12 +184,14 @@
     "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
   },
   "title": {
+    "left": "left",
     "text": "Height vs weight",
     "textStyle": {
       "color": "#F1F5F9",
       "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",
       "fontWeight": 600
-    }
+    },
+    "top": 10
   },
   "tooltip": {
     "backgroundColor": "rgba(15,23,42,0.96)",

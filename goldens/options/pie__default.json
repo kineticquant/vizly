@@ -13,16 +13,20 @@
     "#2D9CDB"
   ],
   "legend": {
-    "left": "left",
     "orient": "vertical",
+    "right": 12,
     "show": true,
     "textStyle": {
       "color": "#374151"
     },
-    "top": "2%"
+    "top": "middle"
   },
   "series": [
     {
+      "center": [
+        "42%",
+        "55%"
+      ],
       "data": [
         {
           "name": "Enterprise",
@@ -57,12 +61,14 @@
     "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
   },
   "title": {
+    "left": "left",
     "text": "Segment mix",
     "textStyle": {
       "color": "#111827",
       "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",
       "fontWeight": 600
-    }
+    },
+    "top": 10
   },
   "tooltip": {
     "backgroundColor": "rgba(255,255,255,0.96)",

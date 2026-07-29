@@ -13,11 +13,12 @@
     "#2D9CDB"
   ],
   "legend": {
+    "right": 12,
     "show": true,
     "textStyle": {
       "color": "#374151"
     },
-    "top": "2%"
+    "top": 10
   },
   "series": [
     {
@@ -69,6 +70,7 @@
         }
       },
       "map": "world",
+      "nameProperty": "name",
       "roam": true,
       "type": "map"
     }
@@ -78,12 +80,14 @@
     "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
   },
   "title": {
+    "left": "left",
     "text": "Global demand",
     "textStyle": {
       "color": "#111827",
       "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",
       "fontWeight": 600
-    }
+    },
+    "top": 10
   },
   "tooltip": {
     "backgroundColor": "rgba(255,255,255,0.96)",

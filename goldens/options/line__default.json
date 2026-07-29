@@ -12,16 +12,24 @@
     "#5B4B8A",
     "#2D9CDB"
   ],
+  "grid": {
+    "bottom": 28,
+    "containLabel": true,
+    "left": 12,
+    "right": 16,
+    "top": 64
+  },
   "legend": {
     "data": [
       "revenue",
       "cost"
     ],
+    "right": 12,
     "show": true,
     "textStyle": {
       "color": "#374151"
     },
-    "top": "2%"
+    "top": 10
   },
   "series": [
     {
@@ -82,12 +90,14 @@
     "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif"
   },
   "title": {
+    "left": "left",
     "text": "Revenue vs cost",
     "textStyle": {
       "color": "#111827",
       "fontFamily": "\"IBM Plex Sans\", \"Segoe UI\", system-ui, sans-serif",
       "fontWeight": 600
-    }
+    },
+    "top": 10
   },
   "tooltip": {
     "backgroundColor": "rgba(255,255,255,0.96)",

@@ -2,8 +2,8 @@
 
 **Status**
 
-[![PyPI](https://img.shields.io/pypi/v/vizly.svg?logo=pypi&logoColor=white)](https://pypi.org/project/vizly/)
-[![Python versions](https://img.shields.io/pypi/pyversions/vizly.svg?logo=python&logoColor=white)](https://pypi.org/project/vizly/)
+[![PyPI](https://img.shields.io/pypi/v/vizly.svg?logo=pypi&logoColor=white&cacheSeconds=300)](https://pypi.org/project/vizly/)
+[![Python versions](https://img.shields.io/pypi/pyversions/vizly.svg?logo=python&logoColor=white&cacheSeconds=300)](https://pypi.org/project/vizly/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/kineticquant/vizly/blob/main/LICENSE)
 [![CI](https://img.shields.io/github/actions/workflow/status/kineticquant/vizly/ci.yml?branch=main&label=CI&logo=github)](https://github.com/kineticquant/vizly/actions/workflows/ci.yml)
 
